@@ -1,0 +1,3274 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="Shape of Feelings - A premium preschool emotion learning game for children aged 3 to 6. Explore feelings in Bahasa Melayu and English.">
+  <title>Shape of Feelings</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-ivory: #FFFDF9;
+      --bg-paper: #FAF6ED;
+      --bg-paper-dark: #F0EAD6;
+      --text-charcoal: #2B2A29;
+      --text-muted: #4A4643;
+      
+      /* Crayon Character Colors */
+      --crayon-yellow: #FFD13B;
+      --crayon-yellow-outline: #D49B00;
+      --crayon-orange: #FF7B39;
+      --crayon-orange-outline: #C8490E;
+      --crayon-blue: #3A86FF;
+      --crayon-blue-outline: #1E51A4;
+      --crayon-purple: #9D4EDD;
+      --crayon-purple-outline: #6A1B9A;
+      --crayon-pink: #FF6584;
+      --crayon-pink-outline: #C72A52;
+      
+      /* Accent Crayon Colors */
+      --crayon-green: #38B000;
+      --crayon-green-outline: #1F7A00;
+      --crayon-coral: #FF5A5F;
+      --crayon-sky: #8ECAE6;
+      
+      /* UI Elevation and Hand-drawn borders */
+      --crayon-shadow: 4px 6px 0px rgba(43, 42, 41, 0.16);
+      --crayon-shadow-hover: 6px 9px 0px rgba(43, 42, 41, 0.22);
+      --crayon-shadow-pressed: 2px 3px 0px rgba(43, 42, 41, 0.25);
+      --crayon-radius-lg: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      --crayon-radius-md: 180px 18px 210px 16px / 16px 210px 18px 180px;
+      --crayon-radius-sm: 80px 12px 90px 10px / 10px 90px 12px 80px;
+      --font-storybook: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Comic Neue', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .brand-title,
+    .section-title,
+    .mode-card-title,
+    .quiz-question-banner,
+    .celebration-title,
+    .build-target-banner,
+    #adventure-question-title {
+      font-family: var(--font-storybook);
+      font-weight: 900 !important;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.02em;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      background-image: url('https://imglink.cc/cdn/RaohqrIIZv.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: var(--text-charcoal);
+      font-family: var(--font-storybook);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px), (orientation: portrait) {
+      body {
+        background-image: url('https://imglink.cc/cdn/r5QUCGmtGe.jpeg');
+      }
+    }
+
+    :focus-visible {
+      outline: 4px dashed var(--crayon-blue);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    header {
+      padding: 0.65rem 1rem;
+      background-color: rgba(255, 253, 249, 0.96);
+      border-bottom: 4px solid #2B2A29;
+      box-shadow: 0 4px 12px rgba(43, 42, 41, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand-logo-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0.2rem 0.4rem;
+      border-radius: var(--crayon-radius-sm);
+      transition: transform 0.2s ease;
+    }
+
+    .brand-logo-btn:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 900 !important;
+      color: #2B2A29;
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 0px #FFD13B;
+      -webkit-text-stroke: 0.35px #2B2A29;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .crayon-btn {
+      font-family: var(--font-storybook);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.6rem 1.1rem;
+      border: 3px solid #2B2A29;
+      border-radius: var(--crayon-radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: var(--crayon-shadow);
+      transition: all 0.15s ease-out;
+      user-select: none;
+      background-color: #FFFDF9;
+      color: #2B2A29;
+    }
+
+    .crayon-btn:hover {
+      transform: translateY(-2px) rotate(0.5deg);
+      box-shadow: var(--crayon-shadow-hover);
+    }
+
+    .crayon-btn:active {
+      transform: translateY(2px);
+      box-shadow: var(--crayon-shadow-pressed);
+    }
+
+    .crayon-btn-primary {
+      background-color: var(--crayon-yellow);
+      border-color: #2B2A29;
+    }
+
+    .crayon-btn-green {
+      background-color: #70E000;
+      color: #123B00;
+    }
+
+    .crayon-btn-coral {
+      background-color: #FF70A6;
+      color: #3C0919;
+    }
+
+    .crayon-btn-sky {
+      background-color: var(--crayon-sky);
+    }
+
+    .crayon-btn-icon {
+      padding: 0.35rem;
+      width: 44px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-chibi-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+
+    /* Language Switcher Pill */
+    .lang-toggle-wrap {
+      display: flex;
+      background: #EAE3D2;
+      border: 3px solid #2B2A29;
+      border-radius: 30px;
+      padding: 2px;
+      box-shadow: 2px 3px 0px rgba(43,42,41,0.15);
+    }
+
+    .lang-choice-btn {
+      font-family: var(--font-storybook);
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.65rem;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.2s ease;
+    }
+
+    .lang-choice-btn.active {
+      background: #2B2A29;
+      color: #FFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    main#game-app {
+      flex: 1;
+      max-width: 1050px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem 1rem;
+      position: relative;
+    }
+
+    .screen-view {
+      display: none;
+      animation: gentleFadeIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .screen-view.active {
+      display: block;
+    }
+
+    @keyframes gentleFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Opaque Storybook Header Tab */
+    .section-header {
+      background: linear-gradient(180deg, #FFFDF9 0%, #FFF9EC 100%);
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      box-shadow: var(--crayon-shadow);
+      padding: 1.2rem 1.4rem;
+      margin: 0 auto 1.5rem auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-width: 720px;
+    }
+
+    .section-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20px;
+      right: 20px;
+      height: 5px;
+      background: repeating-linear-gradient(90deg, #FF7B39 0px, #FF7B39 12px, transparent 12px, transparent 20px);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 900 !important;
+      color: #2B2A29;
+      display: inline-block;
+      position: relative;
+      margin-bottom: 0.3rem;
+      -webkit-text-stroke: 0.4px #2B2A29;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      left: -8px;
+      right: -8px;
+      height: 12px;
+      background: var(--crayon-yellow);
+      z-index: -1;
+      border-radius: 8px;
+      opacity: 0.65;
+      transform: rotate(-0.8deg);
+    }
+
+    .section-subtitle {
+      font-size: 1.15rem;
+      color: #2B2A29;
+      font-weight: 800;
+      max-width: 600px;
+      margin: 0.2rem auto 0 auto;
+      line-height: 1.4;
+    }
+
+    /* Storybook Card Container */
+    .storybook-panel {
+      background: #FFFDF9;
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-lg);
+      box-shadow: 6px 9px 0px rgba(43, 42, 41, 0.12);
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .storybook-panel::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 30px;
+      right: 30px;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, #FF7B39 0px, #FF7B39 12px, transparent 12px, transparent 20px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .home-parade-box {
+      background: linear-gradient(180deg, #EDF6F9 0%, #FFFDF9 100%);
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-lg);
+      padding: 1.5rem 1rem;
+      box-shadow: var(--crayon-shadow);
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cloud-doodle {
+      position: absolute;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .cloud-doodle-1 { top: 12px; left: 16px; width: 55px; }
+    .cloud-doodle-2 { top: 10px; right: 18px; width: 62px; }
+
+    .characters-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+    }
+
+    .parade-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .parade-item:hover {
+      transform: translateY(-8px) scale(1.08);
+    }
+
+    .parade-name-badge {
+      font-size: 0.95rem;
+      font-weight: 900;
+      background: #FFF;
+      border: 2px solid #2B2A29;
+      border-radius: 20px;
+      padding: 2px 10px;
+      margin-top: 6px;
+      box-shadow: 2px 3px 0px rgba(0,0,0,0.1);
+    }
+
+    /* 4 Distinctive Activity Cards */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .mode-card {
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      padding: 1.5rem 1.25rem;
+      background-color: #FFFDF9;
+      cursor: pointer;
+      box-shadow: var(--crayon-shadow);
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mode-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--crayon-shadow-hover);
+    }
+
+    .mode-card:active {
+      transform: translateY(2px);
+      box-shadow: var(--crayon-shadow-pressed);
+    }
+
+    .mode-card-1 { background-color: #FFF9DB; }
+    .mode-card-2 { background-color: #FFE8D6; }
+    .mode-card-3 { background-color: #E2ECE9; }
+    .mode-card-4 { background-color: #F3E8FF; }
+
+    .mode-card-icon-wrap {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 3px 6px rgba(43,42,41,0.1));
+      transition: transform 0.25s ease;
+    }
+
+    .mode-card:hover .mode-card-icon-wrap {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    .mode-card-title {
+      font-size: 1.4rem;
+      font-weight: 900 !important;
+      color: #2B2A29;
+      margin-bottom: 0.4rem;
+      -webkit-text-stroke: 0.3px #2B2A29;
+    }
+
+    .mode-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 1rem;
+    }
+
+    .mode-enter-btn {
+      margin-top: auto;
+      font-size: 0.95rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 30px;
+      font-weight: 900;
+      border: 2px solid #2B2A29;
+      background: #FFF;
+      box-shadow: 2px 3px 0px rgba(0,0,0,0.15);
+    }
+
+    .shape-selector-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .shape-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 3px solid #2B2A29;
+      border-radius: var(--crayon-radius-sm);
+      background: #FFF;
+      font-family: var(--font-storybook);
+      font-weight: 900;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 2px 4px 0px rgba(43,42,41,0.15);
+      transition: all 0.2s ease;
+    }
+
+    .shape-tab-btn.active {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 4px 6px 0px rgba(43,42,41,0.25);
+      background: var(--crayon-yellow);
+    }
+
+    .meet-stage-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .meet-stage-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .character-showcase-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #FFF;
+      border: 4px dashed #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      padding: 1.5rem;
+      min-height: 290px;
+      position: relative;
+    }
+
+    .character-showcase-box .speech-bubble {
+      margin-top: 1rem;
+      background: #FFF9DB;
+      border: 3px solid #2B2A29;
+      border-radius: 20px;
+      padding: 0.75rem 1.25rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 3px 4px 0px rgba(43,42,41,0.1);
+      position: relative;
+      max-width: 90%;
+    }
+
+    .character-showcase-box .speech-bubble::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 10px 12px 10px;
+      border-style: solid;
+      border-color: transparent transparent #2B2A29 transparent;
+    }
+
+    .emotions-grid-8 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .emotion-badge-btn {
+      border: 3px solid #2B2A29;
+      border-radius: var(--crayon-radius-sm);
+      background: #FFF;
+      padding: 0.75rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-family: var(--font-storybook);
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: var(--crayon-shadow);
+      transition: all 0.15s ease;
+    }
+
+    .emotion-badge-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .emotion-badge-btn.active {
+      background-color: #D8F3DC;
+      border-color: #1B4332;
+      box-shadow: 4px 5px 0px #1B4332;
+      transform: scale(1.05);
+    }
+
+    .emotion-badge-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quiz-stage-box {
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quiz-question-banner {
+      font-size: 1.6rem;
+      font-weight: 900 !important;
+      margin-bottom: 1.25rem;
+      color: #2B2A29;
+      -webkit-text-stroke: 0.35px #2B2A29;
+    }
+
+    .quiz-character-display {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quiz-answers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 500px) {
+      .quiz-answers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quiz-choice-btn {
+      font-family: var(--font-storybook);
+      font-size: 1.25rem;
+      font-weight: 900;
+      padding: 1.1rem 1rem;
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-sm);
+      background: #FFF;
+      cursor: pointer;
+      box-shadow: var(--crayon-shadow);
+      transition: all 0.15s ease;
+    }
+
+    .quiz-choice-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: var(--crayon-shadow-hover);
+      background-color: #FFF9DB;
+    }
+
+    .quiz-choice-btn.correct-choice {
+      background-color: #70E000 !important;
+      color: #0E3500 !important;
+      transform: scale(1.04);
+      animation: gentlePop 0.4s ease;
+    }
+
+    .quiz-choice-btn.gentle-notice {
+      background-color: #FFD166 !important;
+      color: #3C2200 !important;
+    }
+
+    .quiz-progress-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .quiz-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #2B2A29;
+      background: #DDD;
+    }
+
+    .quiz-dot.done {
+      background: #38B000;
+    }
+
+    .quiz-dot.active {
+      background: #FFD13B;
+      transform: scale(1.25);
+    }
+
+    /* Feedback Banner for all modes */
+    .feedback-banner {
+      min-height: 54px;
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .feedback-banner.success {
+      background: #D8F3DC;
+      color: #1B4332;
+      border: 3px solid #2D6A4F;
+    }
+
+    .feedback-banner.encouraging {
+      background: #FFF3CD;
+      color: #664D03;
+      border: 3px solid #856404;
+    }
+
+    .build-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) {
+      .build-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .build-canvas-container {
+      background: #FFF;
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: var(--crayon-shadow);
+    }
+
+    .build-target-banner {
+      background: #E8F4F8;
+      border: 3px dashed #2B2A29;
+      border-radius: 18px;
+      padding: 0.6rem 1.25rem;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .build-preview-stage {
+      width: 220px;
+      height: 220px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-palette-box {
+      background: #FFFDF9;
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      padding: 1.25rem;
+      box-shadow: var(--crayon-shadow);
+    }
+
+    .feature-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #EAE3D2;
+      padding-bottom: 0.5rem;
+    }
+
+    .feature-tab {
+      flex: 1;
+      padding: 0.5rem;
+      font-family: var(--font-storybook);
+      font-weight: 900;
+      font-size: 0.95rem;
+      border: 2px solid #2B2A29;
+      background: #EFEFEF;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .feature-tab.active {
+      background: var(--crayon-yellow);
+      border-bottom-color: #2B2A29;
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+
+    .feature-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 0.6rem;
+      max-height: 250px;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+
+    .feature-option-btn {
+      border: 3px solid #2B2A29;
+      border-radius: 14px;
+      background: #FFF;
+      padding: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+      transition: all 0.15s ease;
+      height: 70px;
+    }
+
+    .feature-option-btn:hover {
+      transform: scale(1.05);
+      background: #FFF8E7;
+    }
+
+    .feature-option-btn.selected {
+      background: #B7E4C7;
+      border-color: #1B4332;
+      border-width: 4px;
+      box-shadow: 3px 4px 0px #1B4332;
+    }
+
+    .adventure-story-card {
+      background: #FFFDF9;
+      border: 4px solid #2B2A29;
+      border-radius: var(--crayon-radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--crayon-shadow);
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .adventure-scene-art {
+      width: 100%;
+      height: 220px;
+      border: 3px solid #2B2A29;
+      border-radius: var(--crayon-radius-md);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      background: #EDF6F9;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-text-container {
+      background: #FFF9DB;
+      border: 3px solid #2B2A29;
+      border-radius: 18px;
+      padding: 1rem 1.25rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+      box-shadow: 3px 4px 0px rgba(43,42,41,0.08);
+    }
+
+    .empathy-note-box {
+      background: #E8F4F8;
+      border: 3px dashed #3A86FF;
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #103B75;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .adventure-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stepper-flag {
+      width: 32px;
+      height: 32px;
+      border: 2px solid #2B2A29;
+      border-radius: 50%;
+      background: #EAE3D2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .stepper-flag.completed {
+      background: #70E000;
+      color: #123B00;
+    }
+
+    .stepper-flag.current {
+      background: var(--crayon-yellow);
+      transform: scale(1.2);
+    }
+
+    .celebration-screen-box {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #FFFDF9;
+      border: 5px solid #2B2A29;
+      border-radius: var(--crayon-radius-lg);
+      box-shadow: var(--crayon-shadow);
+      position: relative;
+    }
+
+    .celebration-title {
+      font-size: 2.3rem;
+      font-weight: 900 !important;
+      color: #2B2A29;
+      margin-bottom: 0.75rem;
+      -webkit-text-stroke: 0.4px #2B2A29;
+    }
+
+    .celebration-desc {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .star-reward-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .reward-star-icon {
+      width: 50px;
+      height: 50px;
+      animation: gentleBounce 0.8s ease-in-out infinite alternate;
+    }
+
+    .reward-star-icon:nth-child(2) { animation-delay: 0.2s; }
+    .reward-star-icon:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes gentleBounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    @keyframes gentlePop {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1.04); }
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--bg-paper-dark);
+      border-top: 3px solid #2B2A29;
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #2B2A29;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      .brand-title {
+        font-size: 1.15rem;
+      }
+      .section-header {
+        padding: 1rem 0.85rem;
+        margin-bottom: 1.25rem;
+      }
+      .section-title {
+        font-size: 1.65rem;
+      }
+      .section-subtitle {
+        font-size: 1.05rem;
+      }
+      .crayon-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.95rem;
+      }
+      .characters-row {
+        gap: 0.6rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <button class="brand-logo-btn" id="btn-header-home" aria-label="Shape of Feelings - Laman Utama">
+        <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="42" fill="#FFD13B" stroke="#2B2A29" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="36" cy="44" r="5" fill="#2B2A29"/>
+          <circle cx="64" cy="44" r="5" fill="#2B2A29"/>
+          <path d="M 34 60 Q 50 74 66 60" fill="none" stroke="#2B2A29" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-title">Shape of Feelings</span>
+      </button>
+
+      <div class="nav-controls">
+        <!-- Language Switcher: Labelled strictly BM and English -->
+        <div class="lang-toggle-wrap" role="group" aria-label="Pilih Bahasa / Choose Language">
+          <button class="lang-choice-btn active" id="btn-lang-bm" data-lang="bm">BM</button>
+          <button class="lang-choice-btn" id="btn-lang-en" data-lang="en">English</button>
+        </div>
+
+        <!-- Gentle Sound Toggle with Cute Chibi Speaker SVG -->
+        <button class="crayon-btn crayon-btn-icon" id="btn-sound-toggle" aria-label="Bunyi" title="Bunyi">
+          <span class="btn-chibi-icon" id="sound-icon-wrap" aria-hidden="true"></span>
+        </button>
+
+        <!-- Home Quick Navigation with Cute Chibi House SVG -->
+        <button class="crayon-btn crayon-btn-icon crayon-btn-primary" id="btn-nav-home" aria-label="Laman Utama" title="Laman Utama">
+          <span class="btn-chibi-icon btn-home-svg-slot" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="game-app">
+
+    <!-- SCREEN 1: HOME SCREEN -->
+    <section class="screen-view active" id="screen-home" aria-labelledby="home-welcome-heading">
+      <div class="home-parade-box">
+        <svg class="cloud-doodle cloud-doodle-1" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 10 35 Q 10 15 30 15 Q 40 5 60 10 Q 80 5 90 25 Q 95 40 75 40 Z" fill="#E2ECE9" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <svg class="cloud-doodle cloud-doodle-2" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 15 35 Q 15 15 35 15 Q 45 5 65 10 Q 85 5 95 25 Q 100 40 80 40 Z" fill="#FFE8D6" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+
+        <h1 class="section-title" id="home-welcome-heading">Shape of Feelings</h1>
+        <p class="section-subtitle" id="home-welcome-sub">Jom kenali pelbagai perasaan!</p>
+
+        <!-- The Five Shape Friends Parade -->
+        <div class="characters-row" id="home-characters-parade"></div>
+      </div>
+
+      <!-- 4 Imaginative Storybook Entrances with Cute Chibi Activity SVGs -->
+      <div class="modes-grid">
+        <div class="mode-card mode-card-1" id="card-mode-meet" tabindex="0" role="button">
+          <div class="mode-card-icon-wrap" id="icon-meet"></div>
+          <h2 class="mode-card-title" data-i18n="modeMeetTitle">Kenali Perasaan</h2>
+          <p class="mode-card-desc" data-i18n="modeMeetDesc">Terokai wajah dan ekspresi 5 sahabat bentuk secara bebas.</p>
+          <span class="mode-enter-btn" data-i18n="btnExplore">Teroka ➔</span>
+        </div>
+
+        <div class="mode-card mode-card-2" id="card-mode-match" tabindex="0" role="button">
+          <div class="mode-card-icon-wrap" id="icon-match"></div>
+          <h2 class="mode-card-title" data-i18n="modeMatchTitle">Padankan Perasaan</h2>
+          <p class="mode-card-desc" data-i18n="modeMatchDesc">Bolehkah kamu teka perasaan yang ditunjukkan oleh sahabat kita?</p>
+          <span class="mode-enter-btn" data-i18n="btnPlay">Main ➔</span>
+        </div>
+
+        <div class="mode-card mode-card-3" id="card-mode-build" tabindex="0" role="button">
+          <div class="mode-card-icon-wrap" id="icon-build"></div>
+          <h2 class="mode-card-title" data-i18n="modeBuildTitle">Bina Ekspresi</h2>
+          <p class="mode-card-desc" data-i18n="modeBuildDesc">Pilih dan tukar mata, kening, dan mulut untuk bina pelbagai ekspresi wajah.</p>
+          <span class="mode-enter-btn" data-i18n="btnBuild">Bina ➔</span>
+        </div>
+
+        <div class="mode-card mode-card-4" id="card-mode-adventure" tabindex="0" role="button">
+          <div class="mode-card-icon-wrap" id="icon-adventure"></div>
+          <h2 class="mode-card-title" data-i18n="modeAdventureTitle">Pengembaraan Perasaan</h2>
+          <p class="mode-card-desc" data-i18n="modeAdventureDesc">Ikuti kisah harian sahabat kita dan fahami perasaan mereka.</p>
+          <span class="mode-enter-btn" data-i18n="btnStart">Mula ➔</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: MEET THE FEELINGS -->
+    <section class="screen-view" id="screen-meet" aria-labelledby="meet-title">
+      <!-- High Contrast Opaque Header Tab -->
+      <div class="section-header">
+        <svg class="cloud-doodle cloud-doodle-1" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 10 35 Q 10 15 30 15 Q 40 5 60 10 Q 80 5 90 25 Q 95 40 75 40 Z" fill="#E2ECE9" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <svg class="cloud-doodle cloud-doodle-2" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 15 35 Q 15 15 35 15 Q 45 5 65 10 Q 85 5 95 25 Q 100 40 80 40 Z" fill="#FFE8D6" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <h2 class="section-title" id="meet-title" data-i18n="modeMeetTitle">Kenali Perasaan</h2>
+        <p class="section-subtitle" data-i18n="meetInstruction">Pilih seorang sahabat bentuk dan tekan 8 perasaannya!</p>
+      </div>
+
+      <div class="storybook-panel">
+        <div class="shape-selector-tabs" id="meet-shape-tabs" role="tablist"></div>
+
+        <div class="meet-stage-layout">
+          <div class="character-showcase-box">
+            <div id="meet-character-stage" style="min-height: 200px; display: flex; align-items: center; justify-content: center;"></div>
+            <div class="speech-bubble" id="meet-speech-bubble">
+              <span id="meet-phrase-text">"Saya berasa sangat gembira dan ceria!"</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="margin-bottom:0.75rem; font-size:1.2rem; font-weight:900;" data-i18n="labelChooseEmotion">Tekan Perasaan:</h3>
+            <div class="emotions-grid-8" id="meet-emotions-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1rem;">
+        <button class="crayon-btn crayon-btn-primary" id="btn-meet-back-home">
+          <span class="btn-chibi-icon btn-home-svg-slot" aria-hidden="true"></span>
+          <span data-i18n="btnBackHome">Laman Utama</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: MATCH THE FEELING -->
+    <section class="screen-view" id="screen-match" aria-labelledby="match-heading">
+      <div class="section-header">
+        <svg class="cloud-doodle cloud-doodle-1" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 10 35 Q 10 15 30 15 Q 40 5 60 10 Q 80 5 90 25 Q 95 40 75 40 Z" fill="#E2ECE9" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <h2 class="section-title" id="match-heading" data-i18n="modeMatchTitle">Padankan Perasaan</h2>
+        <p class="section-subtitle" id="match-prompt-text" data-i18n="matchSubPrompt">Apakah perasaan sahabat kita?</p>
+      </div>
+
+      <div class="storybook-panel quiz-stage-box">
+        <div class="quiz-question-banner" id="match-question-banner">
+          Apakah perasaan Circle?
+        </div>
+
+        <div class="quiz-character-display" id="match-character-container"></div>
+
+        <div class="quiz-answers-grid" id="match-answers-container"></div>
+
+        <div class="feedback-banner" id="match-feedback-banner" role="status" aria-live="polite"></div>
+
+        <div class="quiz-progress-dots" id="match-progress-dots"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: BUILD THE FACE -->
+    <section class="screen-view" id="screen-build" aria-labelledby="build-heading">
+      <div class="section-header">
+        <svg class="cloud-doodle cloud-doodle-2" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 15 35 Q 15 15 35 15 Q 45 5 65 10 Q 85 5 95 25 Q 100 40 80 40 Z" fill="#FFE8D6" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <h2 class="section-title" id="build-heading" data-i18n="modeBuildTitle">Bina Ekspresi</h2>
+        <p class="section-subtitle" id="build-instruction-text" data-i18n="buildInstruction">Jom bina wajah dengan memilih dan menukar bahagian muka yang betul!</p>
+      </div>
+
+      <div class="storybook-panel">
+        <div class="shape-selector-tabs" id="build-shape-tabs"></div>
+
+        <div class="build-layout">
+          <div class="build-canvas-container">
+            <div class="build-target-banner">
+              <span data-i18n="buildTargetLabel">Jom bina ekspresi:</span>
+              <strong id="build-target-name" style="color: #E63946; display: block; font-size: 1.4rem;">Gembira (Happy)</strong>
+            </div>
+
+            <div class="build-preview-stage" id="build-canvas-preview"></div>
+
+            <div style="display:flex; gap:0.75rem; width:100%; justify-content:center; flex-wrap:wrap;">
+              <button class="crayon-btn crayon-btn-green" id="btn-build-check">
+                <span class="btn-chibi-icon" id="icon-build-check-slot" aria-hidden="true"></span>
+                <span data-i18n="btnCheckFace">Periksa Wajah</span>
+              </button>
+              <button class="crayon-btn" id="btn-build-reset">
+                <span class="btn-chibi-icon" id="icon-build-reset-slot" aria-hidden="true"></span>
+                <span data-i18n="btnReset">Mula Semula</span>
+              </button>
+              <button class="crayon-btn crayon-btn-sky" id="btn-build-new">
+                <span class="btn-chibi-icon" id="icon-build-new-slot" aria-hidden="true"></span>
+                <span data-i18n="btnNewChallenge">Cabaran Baru</span>
+              </button>
+            </div>
+
+            <div class="feedback-banner" id="build-feedback-banner" style="margin-top:1rem; width:100%; text-align:center;" role="status" aria-live="polite"></div>
+          </div>
+
+          <div class="feature-palette-box">
+            <div class="feature-tabs" role="tablist">
+              <button class="feature-tab active" data-feature="brows" id="tab-feat-brows" data-i18n="featBrows">Kening</button>
+              <button class="feature-tab" data-feature="eyes" id="tab-feat-eyes" data-i18n="featEyes">Mata</button>
+              <button class="feature-tab" data-feature="mouth" id="tab-feat-mouth" data-i18n="featMouth">Mulut</button>
+            </div>
+
+            <div class="feature-options-grid" id="feature-options-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: FEELINGS ADVENTURE -->
+    <section class="screen-view" id="screen-adventure" aria-labelledby="adventure-heading">
+      <div class="section-header">
+        <svg class="cloud-doodle cloud-doodle-1" viewBox="0 0 100 50" aria-hidden="true">
+          <path d="M 10 35 Q 10 15 30 15 Q 40 5 60 10 Q 80 5 90 25 Q 95 40 75 40 Z" fill="#E2ECE9" stroke="#2B2A29" stroke-width="3"/>
+        </svg>
+        <h2 class="section-title" id="adventure-heading" data-i18n="modeAdventureTitle">Pengembaraan Perasaan</h2>
+        <p class="section-subtitle" data-i18n="adventureSub">Setiap cerita ada perasaan. Jom bantu sahabat kita!</p>
+      </div>
+
+      <div class="adventure-stepper" id="adventure-stepper-flags"></div>
+
+      <div class="adventure-story-card">
+        <div class="adventure-scene-art" id="adventure-art-frame"></div>
+
+        <div class="story-text-container">
+          <p id="adventure-scenario-text">Cerita situasi bermula di sini...</p>
+        </div>
+
+        <h3 style="margin-bottom:0.75rem; font-size:1.25rem; font-weight:900;" id="adventure-question-title">Bagaimanakah perasaan sahabat ini?</h3>
+
+        <div class="quiz-answers-grid" id="adventure-choices-container"></div>
+
+        <div class="feedback-banner" id="adventure-feedback-banner" role="status" aria-live="polite"></div>
+
+        <div class="empathy-note-box" id="adventure-empathy-box"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: CELEBRATION -->
+    <section class="screen-view" id="screen-celebration" aria-labelledby="celebration-heading">
+      <div class="celebration-screen-box">
+        <div class="star-reward-group">
+          <svg class="reward-star-icon" viewBox="0 0 100 100">
+            <polygon points="50,5 64,36 98,36 70,57 81,91 50,70 19,91 30,57 2,36 36,36" fill="#FFD13B" stroke="#2B2A29" stroke-width="6"/>
+          </svg>
+          <svg class="reward-star-icon" viewBox="0 0 100 100">
+            <polygon points="50,5 64,36 98,36 70,57 81,91 50,70 19,91 30,57 2,36 36,36" fill="#FF70A6" stroke="#2B2A29" stroke-width="6"/>
+          </svg>
+          <svg class="reward-star-icon" viewBox="0 0 100 100">
+            <polygon points="50,5 64,36 98,36 70,57 81,91 50,70 19,91 30,57 2,36 36,36" fill="#38B000" stroke="#2B2A29" stroke-width="6"/>
+          </svg>
+        </div>
+
+        <h2 class="celebration-title" id="celebration-title-text" data-i18n="celebrationGreat">Syabas! Kamu Hebat!</h2>
+        <p class="celebration-desc" id="celebration-desc-text" data-i18n="celebrationMsg">Kamu telah meneroka pelbagai perasaan dengan penuh kasih sayang.</p>
+
+        <div id="celebration-character-display" style="width:160px; height:160px; margin:0 auto 1.5rem auto;"></div>
+
+        <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+          <button class="crayon-btn crayon-btn-primary" id="btn-celebration-replay">
+            <span class="btn-chibi-icon" id="icon-celebrate-replay-slot" aria-hidden="true"></span>
+            <span data-i18n="btnPlayAgain">Main Lagi</span>
+          </button>
+          <button class="crayon-btn crayon-btn-sky" id="btn-celebration-home">
+            <span class="btn-chibi-icon btn-home-svg-slot" aria-hidden="true"></span>
+            <span data-i18n="btnBackHome">Laman Utama</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Kinder Klub | All Rights Reserved
+  </footer>
+
+  <script>
+    /* CHIBI CRAYON ICONS ARCHITECTURE (100% SVG, Zero Unicode Emoji) */
+    const CHIBI_ICONS = {
+      // Cute Chibi Cottage House SVG
+      home: `
+        <svg class="chibi-icon chibi-home" viewBox="0 0 36 36" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="23" y="6" width="4.5" height="8" rx="1.5" fill="#FF7B39" stroke="#2B2A29" stroke-width="2.2" stroke-linejoin="round"/>
+          <ellipse cx="25.2" cy="4" rx="3.2" ry="2" fill="#E2ECE9" stroke="#2B2A29" stroke-width="1.8"/>
+          <path d="M 4 16 Q 18 5 32 16 L 28.5 16 L 7.5 16 Z" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <rect x="7" y="15" width="22" height="16" rx="3.5" fill="#FFFDF9" stroke="#2B2A29" stroke-width="2.4"/>
+          <circle cx="18" cy="12.5" r="3" fill="#8ECAE6" stroke="#2B2A29" stroke-width="1.8"/>
+          <line x1="18" y1="9.5" x2="18" y2="15.5" stroke="#2B2A29" stroke-width="1.4"/>
+          <line x1="15" y1="12.5" x2="21" y2="12.5" stroke="#2B2A29" stroke-width="1.4"/>
+          <path d="M 14.5 31 L 14.5 22.5 Q 18 20.5 21.5 22.5 L 21.5 31 Z" fill="#FFD13B" stroke="#2B2A29" stroke-width="2"/>
+          <circle cx="19.8" cy="26.5" r="0.9" fill="#2B2A29"/>
+          <ellipse cx="10.5" cy="22.5" rx="1.6" ry="1.1" fill="#FF70A6"/>
+          <ellipse cx="25.5" cy="22.5" rx="1.6" ry="1.1" fill="#FF70A6"/>
+        </svg>
+      `,
+      // Cute Chibi Speaker Active SVG
+      speakerOn: `
+        <svg class="chibi-icon chibi-speaker-on" viewBox="0 0 36 36" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="12" width="6" height="12" rx="2" fill="#3A86FF" stroke="#2B2A29" stroke-width="2.4"/>
+          <path d="M 10 12 L 19 6 L 19 30 L 10 24 Z" fill="#3A86FF" stroke="#2B2A29" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="7.8" cy="16.5" r="1.1" fill="#FFF"/>
+          <circle cx="11.8" cy="16.5" r="1.1" fill="#FFF"/>
+          <path d="M 8.8 19.2 Q 9.8 20.4 10.8 19.2" stroke="#FFF" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="6.5" cy="19.5" r="1" fill="#FF70A6"/>
+          <circle cx="13.2" cy="19.5" r="1" fill="#FF70A6"/>
+          <path d="M 23 13 Q 27 18 23 23" stroke="#FF7B39" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+          <path d="M 27 9 Q 33 18 27 27" stroke="#FFD13B" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        </svg>
+      `,
+      // Cute Chibi Speaker Muted SVG
+      speakerOff: `
+        <svg class="chibi-icon chibi-speaker-off" viewBox="0 0 36 36" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="12" width="6" height="12" rx="2" fill="#D5D0C7" stroke="#2B2A29" stroke-width="2.4"/>
+          <path d="M 10 12 L 19 6 L 19 30 L 10 24 Z" fill="#D5D0C7" stroke="#2B2A29" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M 7 17.5 Q 8.5 19.2 10 17.5" stroke="#2B2A29" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M 11.5 17.5 Q 13 19.2 14.5 17.5" stroke="#2B2A29" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <line x1="23" y1="12" x2="31" y2="24" stroke="#FF5A5F" stroke-width="3" stroke-linecap="round"/>
+          <line x1="31" y1="12" x2="23" y2="24" stroke="#FF5A5F" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      `,
+      // Cute Chibi Refresh Arrow (Replaces 🔄)
+      refresh: `
+        <svg class="chibi-icon chibi-refresh" viewBox="0 0 36 36" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="16" fill="#FFFDF9" stroke="#2B2A29" stroke-width="2.2"/>
+          <path d="M 18 7 A 11 11 0 1 1 7.8 22" stroke="#FF7B39" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <polygon points="18,2 18,11 25,6.5" fill="#FF7B39" stroke="#2B2A29" stroke-width="1.8" stroke-linejoin="round"/>
+          <circle cx="15" cy="17" r="1.3" fill="#2B2A29"/>
+          <circle cx="21" cy="17" r="1.3" fill="#2B2A29"/>
+          <ellipse cx="12.5" cy="19.5" rx="1.5" ry="1" fill="#FF70A6"/>
+          <ellipse cx="23.5" cy="19.5" rx="1.5" ry="1" fill="#FF70A6"/>
+          <path d="M 16.5 20 Q 18 21.8 19.5 20" stroke="#2B2A29" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+        </svg>
+      `,
+      // Cute Chibi Sparkle Star (Replaces ✨)
+      sparkle: `
+        <svg class="chibi-icon chibi-sparkle" viewBox="0 0 36 36" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M 18 4 Q 18 18 32 18 Q 18 18 18 32 Q 18 18 4 18 Q 18 18 18 4 Z" fill="#FFD13B" stroke="#2B2A29" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="15.5" cy="16.5" r="1.2" fill="#2B2A29"/>
+          <circle cx="20.5" cy="16.5" r="1.2" fill="#2B2A29"/>
+          <ellipse cx="13" cy="18.5" rx="1.3" ry="0.9" fill="#FF70A6"/>
+          <ellipse cx="23" cy="18.5" rx="1.3" ry="0.9" fill="#FF70A6"/>
+          <path d="M 16.8 19.2 Q 18 20.4 19.2 19.2" stroke="#2B2A29" stroke-width="1" stroke-linecap="round" fill="none"/>
+        </svg>
+      `,
+      // Cute Chibi Challenge Target (Replaces 🎯)
+      target: `
+        <svg class="chibi-icon chibi-target" viewBox="0 0 36 36" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="14" fill="#8ECAE6" stroke="#2B2A29" stroke-width="2.4"/>
+          <circle cx="18" cy="18" r="9" fill="#FFFDF9" stroke="#2B2A29" stroke-width="2"/>
+          <circle cx="18" cy="18" r="4.5" fill="#FF5A5F" stroke="#2B2A29" stroke-width="1.8"/>
+          <circle cx="16.5" cy="17" r="0.9" fill="#FFF"/>
+          <polygon points="26,6 32,4 30,10" fill="#FFD13B" stroke="#2B2A29" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      `
+    };
+
+    // Master Asset List for 45 character assets
+    const CHARACTER_ASSETS = {
+      circle: {
+        base: "https://imglink.cc/cdn/NwpeAKDdIF.png",
+        happy: "https://imglink.cc/cdn/YBVLDpsxVY.png",
+        sad: "https://imglink.cc/cdn/NTJs-Ro6tC.png",
+        angry: "https://imglink.cc/cdn/eT5Y-jc8g1.png",
+        scared: "https://imglink.cc/cdn/OW2NPmK74C.png",
+        surprised: "https://imglink.cc/cdn/w_B_6iK9Bt.png",
+        sleepy: "https://imglink.cc/cdn/g_v3mJzT1D.png",
+        disappointed: "https://imglink.cc/cdn/c-UiuPx4Au.png",
+        tired: "https://imglink.cc/cdn/y0q0VDLqjU.png"
+      },
+      triangle: {
+        base: "https://imglink.cc/cdn/z-ExTnE3dl.png",
+        happy: "https://imglink.cc/cdn/MBRCc-JbMN.png",
+        sad: "https://imglink.cc/cdn/YyPG4WwTre.png",
+        angry: "https://imglink.cc/cdn/QbI7ad8iXx.png",
+        scared: "https://imglink.cc/cdn/qUVrqI3fqE.png",
+        surprised: "https://imglink.cc/cdn/ycn1lNbD3t.png",
+        sleepy: "https://imglink.cc/cdn/xil0TjGham.png",
+        disappointed: "https://imglink.cc/cdn/RNGWzEo2eC.png",
+        tired: "https://imglink.cc/cdn/C3fWeGpjj-.png"
+      },
+      square: {
+        base: "https://imglink.cc/cdn/p7fmNNyl9c.png",
+        happy: "https://imglink.cc/cdn/V0kb6qdjCb.png",
+        sad: "https://imglink.cc/cdn/42T8nuJwCM.png",
+        angry: "https://imglink.cc/cdn/fzDJp8ofoS.png",
+        scared: "https://imglink.cc/cdn/QIr-bdtl-w.png",
+        surprised: "https://imglink.cc/cdn/-i82SZT4Lk.png",
+        sleepy: "https://imglink.cc/cdn/0PaFSGUxJB.png",
+        disappointed: "https://imglink.cc/cdn/Bklz5ILzCb.png",
+        tired: "https://imglink.cc/cdn/QPmpCovMd5.png"
+      },
+      star: {
+        base: "https://imglink.cc/cdn/ms1q9wwXVD.png",
+        happy: "https://imglink.cc/dLEE4VB5I_.png",
+        sad: "https://imglink.cc/cdn/D4x1zsoQs9.png",
+        angry: "https://imglink.cc/cdn/pO1xCS94jW.png",
+        scared: "https://imglink.cc/cdn/myOk6vRp2g.png",
+        surprised: "https://imglink.cc/cdn/fyCVmRTLYY.png",
+        sleepy: "https://imglink.cc/cdn/lQOPzF8b5O.png",
+        disappointed: "https://imglink.cc/cdn/IVf0BY-hwP.png",
+        tired: "https://imglink.cc/cdn/SBEIK7Pz5K.png"
+      },
+      oval: {
+        base: "https://imglink.cc/cdn/zNnaiB0cQW.png",
+        happy: "https://imglink.cc/cdn/5XNWQgtfdR.png",
+        sad: "https://imglink.cc/cdn/uqo-G8FhlI.png",
+        angry: "https://imglink.cc/cdn/O_O2oVH2kw.png",
+        scared: "https://imglink.cc/cdn/CURFs4nx0J.png",
+        surprised: "https://imglink.cc/cdn/02UHuitdqO.png",
+        sleepy: "https://imglink.cc/cdn/OcDha2LO57.png",
+        disappointed: "https://imglink.cc/cdn/FOCMdlPx59.png",
+        tired: "https://imglink.cc/cdn/5MVH1DuCyQ.png"
+      }
+    };
+
+    const CHARACTERS_DATA = {
+      circle: {
+        id: "circle",
+        name: { bm: "Circle", en: "Circle" },
+        colorName: { bm: "Kuning", en: "Yellow" },
+        colorHex: "#FFD13B",
+        outlineHex: "#D49B00"
+      },
+      triangle: {
+        id: "triangle",
+        name: { bm: "Triangle", en: "Triangle" },
+        colorName: { bm: "Oren", en: "Orange" },
+        colorHex: "#FF7B39",
+        outlineHex: "#C8490E"
+      },
+      square: {
+        id: "square",
+        name: { bm: "Square", en: "Square" },
+        colorName: { bm: "Biru", en: "Blue" },
+        colorHex: "#3A86FF",
+        outlineHex: "#1E51A4"
+      },
+      star: {
+        id: "star",
+        name: { bm: "Star", en: "Star" },
+        colorName: { bm: "Ungu", en: "Purple" },
+        colorHex: "#9D4EDD",
+        outlineHex: "#6A1B9A"
+      },
+      oval: {
+        id: "oval",
+        name: { bm: "Oval", en: "Oval" },
+        colorName: { bm: "Merah Jambu", en: "Pink" },
+        colorHex: "#FF70A6",
+        outlineHex: "#C72A52"
+      }
+    };
+
+    const EMOTIONS_DATA = {
+      happy: {
+        id: "happy",
+        name: { bm: "Gembira", en: "Happy" },
+        phrase: {
+          bm: "Saya berasa sangat gembira dan ceria!",
+          en: "I feel so happy and cheerful!"
+        }
+      },
+      sad: {
+        id: "sad",
+        name: { bm: "Sedih", en: "Sad" },
+        phrase: {
+          bm: "Saya berasa sedih... perlukan pelukan hangat.",
+          en: "I feel sad... I need a warm hug."
+        }
+      },
+      angry: {
+        id: "angry",
+        name: { bm: "Marah", en: "Angry" },
+        phrase: {
+          bm: "Saya berasa geram. Jom tarik nafas perlahan-lahan.",
+          en: "I feel frustrated. Let's take slow deep breaths."
+        }
+      },
+      scared: {
+        id: "scared",
+        name: { bm: "Takut", en: "Scared" },
+        phrase: {
+          bm: "Saya rasa takut sedikit. Saya mahu rasa selamat.",
+          en: "I feel a little scared. I want to feel safe."
+        }
+      },
+      surprised: {
+        id: "surprised",
+        name: { bm: "Terkejut", en: "Surprised" },
+        phrase: {
+          bm: "Wah! Saya berasa terkejut dan kagum!",
+          en: "Wow! I feel surprised and amazed!"
+        }
+      },
+      sleepy: {
+        id: "sleepy",
+        name: { bm: "Mengantuk", en: "Sleepy" },
+        phrase: {
+          bm: "Mata saya kuyu... menguap hendak tidur.",
+          en: "My eyes are droopy... yawning ready for bed."
+        }
+      },
+      disappointed: {
+        id: "disappointed",
+        name: { bm: "Kecewa", en: "Disappointed" },
+        phrase: {
+          bm: "Rancangan tidak menjadi, saya berasa kecewa.",
+          en: "Things didn't turn out as hoped, I feel disappointed."
+        }
+      },
+      tired: {
+        id: "tired",
+        name: { bm: "Penat", en: "Tired" },
+        phrase: {
+          bm: "Banyak bermain hari ini, badan saya rasa penat.",
+          en: "Played a lot today, my body feels tired."
+        }
+      }
+    };
+
+    const TRANSLATIONS = {
+      bm: {
+        appTitle: "Shape of Feelings",
+        welcomeSub: "Jom kenali pelbagai perasaan!",
+        modeMeetTitle: "Kenali Perasaan",
+        modeMeetDesc: "Terokai wajah dan ekspresi 5 sahabat bentuk secara bebas.",
+        modeMatchTitle: "Padankan Perasaan",
+        modeMatchDesc: "Bolehkah kamu teka perasaan yang ditunjukkan oleh sahabat kita?",
+        matchSubPrompt: "Apakah perasaan sahabat kita?",
+        modeBuildTitle: "Bina Ekspresi",
+        modeBuildDesc: "Pilih dan tukar mata, kening, dan mulut untuk bina pelbagai ekspresi wajah.",
+        buildInstruction: "Jom bina wajah dengan memilih dan menukar bahagian muka yang betul!",
+        modeAdventureTitle: "Pengembaraan Perasaan",
+        modeAdventureDesc: "Ikuti kisah harian sahabat kita dan fahami perasaan mereka.",
+        btnExplore: "Teroka ➔",
+        btnPlay: "Main ➔",
+        btnBuild: "Bina ➔",
+        btnStart: "Mula ➔",
+        btnBackHome: "Laman Utama",
+        meetInstruction: "Pilih seorang sahabat bentuk dan tekan 8 perasaannya!",
+        labelChooseEmotion: "Tekan Perasaan:",
+        feedbackCorrect: "Hebat! Betul!",
+        feedbackEncourage: "Tak mengapa! Jom cuba soalan seterusnya.",
+        buildTargetLabel: "Jom bina ekspresi:",
+        btnCheckFace: "Periksa Wajah",
+        btnReset: "Mula Semula",
+        btnNewChallenge: "Cabaran Baru",
+        featBrows: "Kening",
+        featEyes: "Mata",
+        featMouth: "Mulut",
+        buildSuccessMsg: "Hebat! Wajah ini meluahkan perasaan tersebut dengan baik!",
+        buildTryHint: "Hampir tepat! Jom cuba tukar kening, mata, atau mulut untuk perasaan ini.",
+        adventureSub: "Setiap cerita ada perasaan. Jom bantu sahabat kita!",
+        adventureQuestion: "Bagaimanakah perasaan sahabat ini?",
+        celebrationGreat: "Syabas! Kamu Hebat!",
+        celebrationMsg: "Kamu telah meneroka pelbagai perasaan dengan penuh kasih sayang.",
+        btnPlayAgain: "Main Lagi"
+      },
+      en: {
+        appTitle: "Shape of Feelings",
+        welcomeSub: "Let’s explore different feelings!",
+        modeMeetTitle: "Meet the Feelings",
+        modeMeetDesc: "Freely explore the faces and expressions of our 5 shape friends.",
+        modeMatchTitle: "Match the Feeling",
+        modeMatchDesc: "Can you guess how our friend is feeling from their face?",
+        matchSubPrompt: "How is our friend feeling?",
+        modeBuildTitle: "Build the Face",
+        modeBuildDesc: "Choose and change eyes, eyebrows, and mouth to build different facial expressions.",
+        buildInstruction: "Let's build a face by picking and changing the right facial parts!",
+        modeAdventureTitle: "Feelings Adventure",
+        modeAdventureDesc: "Follow our friends' daily stories and understand their feelings.",
+        btnExplore: "Explore ➔",
+        btnPlay: "Play ➔",
+        btnBuild: "Build ➔",
+        btnStart: "Start ➔",
+        btnBackHome: "Home",
+        meetInstruction: "Pick a shape friend and tap their 8 feelings!",
+        labelChooseEmotion: "Tap a Feeling:",
+        feedbackCorrect: "Wonderful! That’s right!",
+        feedbackEncourage: "That’s okay! Let’s try the next question.",
+        buildTargetLabel: "Let's build expression:",
+        btnCheckFace: "Check Face",
+        btnReset: "Reset",
+        btnNewChallenge: "New Challenge",
+        featBrows: "Eyebrows",
+        featEyes: "Eyes",
+        featMouth: "Mouth",
+        buildSuccessMsg: "Wonderful! This face communicates that feeling so well!",
+        buildTryHint: "Almost there! Try changing the eyebrows, eyes, or mouth for this feeling.",
+        adventureSub: "Every story has feelings. Let's help our friends!",
+        adventureQuestion: "How might this friend feel?",
+        celebrationGreat: "Well Done! You're Amazing!",
+        celebrationMsg: "You explored so many feelings with empathy and care.",
+        btnPlayAgain: "Play Again"
+      }
+    };
+
+    /* 18 COMPLETE ADVENTURE SCENES (Randomized Every Session) */
+    const ADVENTURE_SCENES = [
+      {
+        id: "gift",
+        character: "circle",
+        scenario: {
+          bm: "Circle menerima sebuah bungkusan hadiah kejutan dengan reben merah yang cantik!",
+          en: "Circle receives a surprise gift wrapped with a lovely red ribbon!"
+        },
+        bgType: "gift",
+        acceptableFeelings: ["surprised", "happy"],
+        primaryFeeling: "surprised",
+        empathyNote: {
+          bm: "Mendapat hadiah kejutan boleh membuat kita berasa terkejut dan sangat gembira!",
+          en: "Receiving a surprise present can make us feel surprised and very happy!"
+        }
+      },
+      {
+        id: "room",
+        character: "triangle",
+        scenario: {
+          bm: "Triangle mencari kereta mainan kesayangannya di dalam kotak tetapi tidak menjumpainya.",
+          en: "Triangle looks for his favourite toy car in the toy box, but it is not there."
+        },
+        bgType: "room",
+        acceptableFeelings: ["sad", "disappointed", "scared"],
+        primaryFeeling: "sad",
+        empathyNote: {
+          bm: "Bila barang kesayangan hilang, wajar untuk kita berasa sedih atau kecewa.",
+          en: "When a favourite item goes missing, it is completely normal to feel sad or disappointed."
+        }
+      },
+      {
+        id: "blocks",
+        character: "square",
+        scenario: {
+          bm: "Menara blok kayu tinggi yang dibina oleh Square tiba-tiba rebah ke lantai.",
+          en: "The tall wooden block tower Square carefully built suddenly fell to the floor."
+        },
+        bgType: "blocks",
+        acceptableFeelings: ["angry", "disappointed", "sad"],
+        primaryFeeling: "disappointed",
+        empathyNote: {
+          bm: "Bila kerja keras kita runtuh, kita boleh berasa kecewa atau marah seketika.",
+          en: "When something we worked hard on falls, feeling disappointed or upset is normal."
+        }
+      },
+      {
+        id: "rain",
+        character: "star",
+        scenario: {
+          bm: "Star mendengar bunyi guruh kuat 'DUM!' semasa hujan lebat di luar rumah.",
+          en: "Star hears a sudden loud boom of thunder outside during heavy rain."
+        },
+        bgType: "rain",
+        acceptableFeelings: ["scared", "surprised"],
+        primaryFeeling: "scared",
+        empathyNote: {
+          bm: "Bunyi guruh yang kuat memang menakutkan, tetapi kita selamat di dalam rumah.",
+          en: "Loud thunder can feel scary, but we are cozy and safe inside."
+        }
+      },
+      {
+        id: "park",
+        character: "oval",
+        scenario: {
+          bm: "Oval sudah selesai berlari dan bermain buaian di taman sepanjang petang.",
+          en: "Oval has finished running and playing on the swings all afternoon."
+        },
+        bgType: "park",
+        acceptableFeelings: ["tired", "sleepy", "happy"],
+        primaryFeeling: "tired",
+        empathyNote: {
+          bm: "Selepas banyak bergerak dan bersenam, badan kita terasa penat dan perlukan rehat.",
+          en: "After lots of running and active play, our body feels tired and needs a rest."
+        }
+      },
+      {
+        id: "night",
+        character: "circle",
+        scenario: {
+          bm: "Hari sudah larut malam, lampu dibilik dimalapkan dan buku cerita ditutup.",
+          en: "It is late at night, the bedroom lights are dimmed and the storybook is closed."
+        },
+        bgType: "night",
+        acceptableFeelings: ["sleepy", "tired"],
+        primaryFeeling: "sleepy",
+        empathyNote: {
+          bm: "Mata terasa berat dan mulut menguap adalah tanda kita bersedia untuk tidur lena.",
+          en: "Heavy eyes and gentle yawns show that we are peacefully ready for sleep."
+        }
+      },
+      {
+        id: "art",
+        character: "triangle",
+        scenario: {
+          bm: "Lukisan rama-rama Triangle terkena titisan air lalu warnanya comot sedikit.",
+          en: "Triangle's butterfly drawing got splashed with water and smudged a bit."
+        },
+        bgType: "art",
+        acceptableFeelings: ["disappointed", "sad", "angry"],
+        primaryFeeling: "disappointed",
+        empathyNote: {
+          bm: "Apabila lukisan tidak jadi seperti yang diharapkan, kita mungkin berasa kecewa.",
+          en: "When art does not turn out as expected, feeling disappointed is understandable."
+        }
+      },
+      {
+        id: "snack",
+        character: "square",
+        scenario: {
+          bm: "Kawan baik Square berkongsi biskut coklat yang enak di waktu minum petang.",
+          en: "Square's best friend shares a delicious chocolate cookie during snack time."
+        },
+        bgType: "snack",
+        acceptableFeelings: ["happy", "surprised"],
+        primaryFeeling: "happy",
+        empathyNote: {
+          bm: "Kebaikan kawan berkongsi biskut coklat membuat hati kita berasa ceria dan gembira!",
+          en: "A friend's kindness in sharing cookies makes our heart feel warm and happy!"
+        }
+      },
+      {
+        id: "balloon",
+        character: "star",
+        scenario: {
+          bm: "Star memegang belon merah yang comel, tiba-tiba tali belon terlepas dan terbang tinggi ke awan.",
+          en: "Star holds a cute red balloon, but suddenly the string slips away and it floats high into the clouds."
+        },
+        bgType: "balloon",
+        acceptableFeelings: ["sad", "disappointed", "surprised"],
+        primaryFeeling: "sad",
+        empathyNote: {
+          bm: "Belon kesayangan terbang boleh buat kita rasa sedih atau kecewa, tak mengapa untuk rasa sedih.",
+          en: "When a favourite balloon floats away, it is very okay to feel sad or disappointed."
+        }
+      },
+      {
+        id: "icecream",
+        character: "oval",
+        scenario: {
+          bm: "Hari panas terik, Ibu membelikan kon aiskrim strawberi yang sangat sedap dan sejuk!",
+          en: "On a warm sunny day, Mom buys a delicious, cool strawberry ice cream cone!"
+        },
+        bgType: "icecream",
+        acceptableFeelings: ["happy", "surprised"],
+        primaryFeeling: "happy",
+        empathyNote: {
+          bm: "Menikmati aiskrim sejuk dan manis membuat hati berasa riang dan gembira!",
+          en: "Enjoying a cold, sweet ice cream treat makes us feel cheerful and happy!"
+        }
+      },
+      {
+        id: "puzzle",
+        character: "circle",
+        scenario: {
+          bm: "Circle sedang menyusun puzzle gambar dinosaur tetapi kepingan terakhir tidak muat masuk.",
+          en: "Circle is assembling a dinosaur puzzle, but the last piece refuses to fit."
+        },
+        bgType: "puzzle",
+        acceptableFeelings: ["angry", "disappointed", "tired"],
+        primaryFeeling: "angry",
+        empathyNote: {
+          bm: "Bila permainan rasa susah, kita boleh rasa geram atau marah. Tarik nafas dan rehat sekejap.",
+          en: "When a game gets tricky, feeling frustrated is normal. Take a slow breath and take a break."
+        }
+      },
+      {
+        id: "stage",
+        character: "triangle",
+        scenario: {
+          bm: "Triangle dipanggil ke hadapan kelas untuk menyanyikan lagu kanak-kanak di hadapan kawan-kawan baru.",
+          en: "Triangle is called to the front of the classroom to sing a song in front of new friends."
+        },
+        bgType: "stage",
+        acceptableFeelings: ["scared", "surprised", "happy"],
+        primaryFeeling: "scared",
+        empathyNote: {
+          bm: "Berdiri di hadapan orang ramai boleh membuat kita rasa takut atau gementar, itu perkara biasa!",
+          en: "Standing in front of a class can feel a little scary or nervous, and that is completely natural!"
+        }
+      },
+      {
+        id: "hug",
+        character: "square",
+        scenario: {
+          bm: "Square rajin menolong mengemas semua mainan ke dalam bakul lalu menerima pelukan hangat dan pujian.",
+          en: "Square tidies up all the toys into the storage basket and gets a warm, cozy hug."
+        },
+        bgType: "hug",
+        acceptableFeelings: ["happy", "surprised"],
+        primaryFeeling: "happy",
+        empathyNote: {
+          bm: "Rasa dihargai dan disayangi selepas membantu membuat hati kita berasa sangat gembira!",
+          en: "Feeling loved and appreciated after helping fills our hearts with joy!"
+        }
+      },
+      {
+        id: "pool",
+        character: "star",
+        scenario: {
+          bm: "Star telah berenang dan bermain percikan air di kolam renang sepanjang pagi.",
+          en: "Star has been swimming and splashing happily in the pool all morning."
+        },
+        bgType: "pool",
+        acceptableFeelings: ["tired", "sleepy", "happy"],
+        primaryFeeling: "tired",
+        empathyNote: {
+          bm: "Berenang menggunakan banyak tenaga, jadi wajar badan kita berasa penat dan perlukan rehat.",
+          en: "Swimming uses lots of energy, so our body naturally feels tired and ready for a rest."
+        }
+      },
+      {
+        id: "slide",
+        character: "oval",
+        scenario: {
+          bm: "Oval sedang beratur mahu menaiki gelongsor, tetapi tiba-tiba waktu bermain di taman telah tamat.",
+          en: "Oval is queueing for the big playground slide, but playtime is suddenly over."
+        },
+        bgType: "slide",
+        acceptableFeelings: ["disappointed", "sad", "angry"],
+        primaryFeeling: "disappointed",
+        empathyNote: {
+          bm: "Apabila giliran kita tidak sempat tiba sebelum masa habis, wajar untuk kita berasa kecewa.",
+          en: "When our turn doesn't happen before time runs out, feeling disappointed is very natural."
+        }
+      },
+      {
+        id: "darkroom",
+        character: "circle",
+        scenario: {
+          bm: "Circle melangkah masuk ke dalam bilik tidur yang gelap sebelum lampu sempat dinyalakan.",
+          en: "Circle steps into a dark bedroom before the lights have been turned on."
+        },
+        bgType: "darkroom",
+        acceptableFeelings: ["scared", "surprised"],
+        primaryFeeling: "scared",
+        empathyNote: {
+          bm: "Tempat yang gelap boleh membuat kita rasa takut sedikit. Buka lampu untuk berasa selamat semula!",
+          en: "Dark rooms can feel a little scary. Turning on the light helps us feel safe again!"
+        }
+      },
+      {
+        id: "lullaby",
+        character: "triangle",
+        scenario: {
+          bm: "Triangle berbaring di atas tilam empuk sambil mendengar alunan muzik dodoi yang sangat lembut.",
+          en: "Triangle lies down on a soft mattress listening to a sweet, gentle lullaby."
+        },
+        bgType: "lullaby",
+        acceptableFeelings: ["sleepy", "tired"],
+        primaryFeeling: "sleepy",
+        empathyNote: {
+          bm: "Suasana yang tenang dan alunan muzik lembut membantu mata kita berasa mengantuk dan lena.",
+          en: "Quiet cozy sounds help our eyes feel heavy and sleepy, ready for sweet dreams."
+        }
+      },
+      {
+        id: "garden",
+        character: "square",
+        scenario: {
+          bm: "Biji benih bunga yang disiram oleh Square setiap hari akhirnya mengeluarkan tunas hijau kecil!",
+          en: "The flower seed Square watered every day has finally sprouted into a cute green seedling!"
+        },
+        bgType: "garden",
+        acceptableFeelings: ["surprised", "happy"],
+        primaryFeeling: "surprised",
+        empathyNote: {
+          bm: "Melihat tanaman kita mula membesar membuat kita berasa terkejut kagum dan gembira!",
+          en: "Seeing our little plant sprout makes us feel wonderfully surprised and happy!"
+        }
+      }
+    ];
+
+    const STORAGE_KEY = "shape_of_feelings_kinder_klub_v1";
+
+    let gameState = {
+      lang: "bm",
+      sound: true,
+      currentScreen: "home",
+      meetShape: "circle",
+      meetEmotion: "happy",
+      matchQuestionIndex: 0,
+      matchRounds: 10,
+      matchCurrentQ: null,
+      matchCorrectCount: 0,
+      buildShape: "circle",
+      buildTargetEmotion: "happy",
+      buildFeatures: {
+        brows: "happy_arch",
+        eyes: "bright_round",
+        mouth: "big_smile"
+      },
+      buildActiveTab: "brows",
+      adventureQueue: [],
+      adventureIndex: 0,
+      adventureRounds: 8
+    };
+
+    function loadSavedSettings() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.lang) gameState.lang = parsed.lang;
+          if (typeof parsed.sound === "boolean") gameState.sound = parsed.sound;
+        }
+      } catch (err) {}
+    }
+
+    function saveSettings() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          lang: gameState.lang,
+          sound: gameState.sound
+        }));
+      } catch (err) {}
+    }
+
+    let audioCtx = null;
+
+    function playTone(type) {
+      if (!gameState.sound) return;
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) audioCtx = new AudioContextClass();
+        }
+        if (audioCtx && audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === "pop") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(350, now);
+          osc.frequency.exponentialRampToValueAtTime(550, now + 0.12);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        } else if (type === "correct") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.12);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === "encourage") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(392, now + 0.2);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === "celebrate") {
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, idx) => {
+            const noteOsc = audioCtx.createOscillator();
+            const noteGain = audioCtx.createGain();
+            noteOsc.connect(noteGain);
+            noteGain.connect(audioCtx.destination);
+            noteOsc.type = "triangle";
+            noteOsc.frequency.setValueAtTime(freq, now + idx * 0.1);
+            noteGain.gain.setValueAtTime(0.2, now + idx * 0.1);
+            noteGain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
+            noteOsc.start(now + idx * 0.1);
+            noteOsc.stop(now + idx * 0.1 + 0.25);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function generateCharacterSVG(shapeId, emotionId, size = 180, isBaseOnly = false) {
+      const char = CHARACTERS_DATA[shapeId] || CHARACTERS_DATA.circle;
+      const col = char.colorHex;
+      const strokeCol = "#2B2A29";
+
+      let bodyTransform = "";
+      let limbAngleL = 0;
+      let limbAngleR = 0;
+      if (!isBaseOnly) {
+        if (emotionId === "sad" || emotionId === "disappointed") {
+          bodyTransform = "transform='translate(0, 8)'";
+          limbAngleL = 25; limbAngleR = -25;
+        } else if (emotionId === "angry") {
+          bodyTransform = "transform='scale(1.02)'";
+        } else if (emotionId === "tired") {
+          bodyTransform = "transform='translate(0, 10) rotate(-2 100 100)'";
+          limbAngleL = 35; limbAngleR = -35;
+        } else if (emotionId === "happy" || emotionId === "surprised") {
+          bodyTransform = "transform='translate(0, -4)'";
+          limbAngleL = -30; limbAngleR = 30;
+        }
+      }
+
+      let shapePath = "";
+      if (shapeId === "circle") {
+        shapePath = `<circle cx="100" cy="95" r="54" fill="${col}" stroke="${strokeCol}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else if (shapeId === "triangle") {
+        shapePath = `<polygon points="100,38 46,146 154,146" fill="${col}" stroke="${strokeCol}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else if (shapeId === "square") {
+        shapePath = `<rect x="52" y="48" width="96" height="96" rx="14" fill="${col}" stroke="${strokeCol}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else if (shapeId === "star") {
+        shapePath = `<polygon points="100,32 118,74 163,74 126,101 140,144 100,118 60,144 74,101 37,74 82,74" fill="${col}" stroke="${strokeCol}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else if (shapeId === "oval") {
+        shapePath = `<ellipse cx="100" cy="95" rx="46" ry="62" fill="${col}" stroke="${strokeCol}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+      }
+
+      const cheeks = `
+        <ellipse cx="74" cy="106" rx="9" ry="6" fill="#FF70A6" opacity="0.65" />
+        <ellipse cx="126" cy="106" rx="9" ry="6" fill="#FF70A6" opacity="0.65" />
+      `;
+
+      const limbs = `
+        <path d="M 82 148 L 80 172 M 72 172 L 84 172" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 118 148 L 120 172 M 116 172 L 128 172" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 50 102 Q 32 112 36 126" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none" transform="rotate(${limbAngleL} 50 102)"/>
+        <path d="M 150 102 Q 168 112 164 126" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none" transform="rotate(${limbAngleR} 150 102)"/>
+      `;
+
+      let faceSVG = "";
+      if (isBaseOnly) {
+        faceSVG = `
+          <path d="M 72 78 Q 80 74 88 78" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M 112 78 Q 120 74 128 78" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <circle cx="80" cy="90" r="5" fill="${strokeCol}"/>
+          <circle cx="120" cy="90" r="5" fill="${strokeCol}"/>
+          <path d="M 86 112 Q 100 120 114 112" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+        `;
+      } else {
+        switch (emotionId) {
+          case "happy":
+            faceSVG = `
+              <path d="M 70 74 Q 80 68 90 74" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M 110 74 Q 120 68 130 74" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <circle cx="80" cy="88" r="6" fill="${strokeCol}"/>
+              <circle cx="82" cy="86" r="2" fill="#FFF"/>
+              <circle cx="120" cy="88" r="6" fill="${strokeCol}"/>
+              <circle cx="122" cy="86" r="2" fill="#FFF"/>
+              <path d="M 80 108 Q 100 130 120 108" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+            `;
+            break;
+          case "sad":
+            faceSVG = `
+              <path d="M 70 74 Q 80 80 90 76" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M 110 76 Q 120 80 130 74" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <ellipse cx="80" cy="92" rx="5" ry="6" fill="${strokeCol}"/>
+              <ellipse cx="120" cy="92" rx="5" ry="6" fill="${strokeCol}"/>
+              <circle cx="75" cy="100" r="2.5" fill="#3A86FF"/>
+              <path d="M 82 120 Q 100 104 118 120" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+            `;
+            break;
+          case "angry":
+            faceSVG = `
+              <path d="M 70 76 L 90 82" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M 130 76 L 110 82" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="80" cy="92" r="5" fill="${strokeCol}"/>
+              <circle cx="120" cy="92" r="5" fill="${strokeCol}"/>
+              <path d="M 84 114 Q 100 110 116 114" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+            `;
+            break;
+          case "scared":
+            faceSVG = `
+              <path d="M 70 70 Q 80 66 90 72" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M 110 72 Q 120 66 130 70" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <circle cx="80" cy="88" r="8" fill="#FFF" stroke="${strokeCol}" stroke-width="3"/>
+              <circle cx="80" cy="88" r="4" fill="${strokeCol}"/>
+              <circle cx="120" cy="88" r="8" fill="#FFF" stroke="${strokeCol}" stroke-width="3"/>
+              <circle cx="120" cy="88" r="4" fill="${strokeCol}"/>
+              <path d="M 88 116 Q 94 112 100 116 Q 106 120 112 116" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+            `;
+            break;
+          case "surprised":
+            faceSVG = `
+              <path d="M 68 68 Q 80 60 92 68" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M 108 68 Q 120 60 132 68" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <circle cx="80" cy="86" r="7" fill="${strokeCol}"/>
+              <circle cx="82" cy="84" r="2.5" fill="#FFF"/>
+              <circle cx="120" cy="86" r="7" fill="${strokeCol}"/>
+              <circle cx="122" cy="84" r="2.5" fill="#FFF"/>
+              <ellipse cx="100" cy="116" rx="9" ry="13" fill="#FFF" stroke="${strokeCol}" stroke-width="4.5"/>
+            `;
+            break;
+          case "sleepy":
+            faceSVG = `
+              <path d="M 72 76 Q 80 74 88 77" stroke="${strokeCol}" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M 112 77 Q 120 74 128 76" stroke="${strokeCol}" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M 72 90 Q 80 84 88 90" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+              <path d="M 112 90 Q 120 84 128 90" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+              <ellipse cx="100" cy="114" rx="7" ry="10" fill="#EAE3D2" stroke="${strokeCol}" stroke-width="4"/>
+              <text x="135" y="72" font-family="'Quicksand', sans-serif" font-weight="900" font-size="14" fill="#3A86FF">z</text>
+              <text x="144" y="60" font-family="'Quicksand', sans-serif" font-weight="900" font-size="18" fill="#3A86FF">Z</text>
+            `;
+            break;
+          case "disappointed":
+            faceSVG = `
+              <path d="M 72 78 L 88 80" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 112 80 L 128 78" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="80" cy="94" rx="5" ry="4" fill="${strokeCol}"/>
+              <ellipse cx="120" cy="94" rx="5" ry="4" fill="${strokeCol}"/>
+              <path d="M 88 116 Q 100 110 112 116" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            `;
+            break;
+          case "tired":
+            faceSVG = `
+              <path d="M 72 80 L 88 81" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 112 81 L 128 80" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 74 92 L 86 92" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+              <ellipse cx="80" cy="94" rx="4" ry="2" fill="${strokeCol}"/>
+              <path d="M 114 92 L 126 92" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+              <ellipse cx="120" cy="94" rx="4" ry="2" fill="${strokeCol}"/>
+              <path d="M 90 115 Q 100 122 110 115 Z" fill="#FFE8D6" stroke="${strokeCol}" stroke-width="4" stroke-linejoin="round"/>
+            `;
+            break;
+        }
+      }
+
+      return `
+        <svg width="${size}" height="${size}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${char.name[gameState.lang]} ${emotionId || ''}">
+          <g ${bodyTransform}>
+            ${limbs}
+            ${shapePath}
+            ${cheeks}
+            ${faceSVG}
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderCharacterView(shapeId, emotionId, size = 180, isBase = false) {
+      const char = CHARACTERS_DATA[shapeId] || CHARACTERS_DATA.circle;
+      const url = isBase ? (CHARACTER_ASSETS[shapeId]?.base || "") : (CHARACTER_ASSETS[shapeId]?.[emotionId] || "");
+      const container = document.createElement("div");
+      container.style.width = `${size}px`;
+      container.style.height = `${size}px`;
+      container.style.display = "flex";
+      container.style.alignItems = "center";
+      container.style.justifyContent = "center";
+
+      if (url && url.trim() !== "") {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = `${char.name[gameState.lang] || 'Character'} - ${emotionId || 'base'}`;
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+        img.style.width = "auto";
+        img.style.height = "auto";
+        img.style.objectFit = "contain";
+        img.style.display = "block";
+        img.loading = "lazy";
+        img.onerror = () => {
+          container.innerHTML = generateCharacterSVG(shapeId, emotionId, size, isBase);
+        };
+        container.appendChild(img);
+      } else {
+        container.innerHTML = generateCharacterSVG(shapeId, emotionId, size, isBase);
+      }
+      return container;
+    }
+
+    /* PREMIUM CUTE CHIBI ACTIVITY MODE SVGS */
+    function renderModeIcons() {
+      // 1. Kenali Perasaan: Chibi Best Friends Hugging & Waving (Circle & Triangle)
+      const meet = document.getElementById("icon-meet");
+      if (meet) {
+        meet.innerHTML = `
+          <svg viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 60 22 C 60 14, 50 12, 48 18 C 48 24, 60 30, 60 30 C 60 30, 72 24, 72 18 C 70 12, 60 14, 60 22 Z" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2.5" stroke-linejoin="round"/>
+            <polygon points="22,26 24,20 26,26 32,28 26,30 24,36 22,30 16,28" fill="#FFD13B" stroke="#2B2A29" stroke-width="1.8"/>
+            <polygon points="100,28 102,23 104,28 109,30 104,32 102,37 100,32 95,30" fill="#38B000" stroke="#2B2A29" stroke-width="1.8"/>
+            
+            <g transform="translate(4, 4)">
+              <circle cx="42" cy="68" r="27" fill="#FFD13B" stroke="#2B2A29" stroke-width="4.5"/>
+              <ellipse cx="28" cy="73" rx="4.5" ry="3" fill="#FF70A6"/>
+              <ellipse cx="54" cy="73" rx="4.5" ry="3" fill="#FF70A6"/>
+              <circle cx="34" cy="64" r="5" fill="#2B2A29"/>
+              <circle cx="36" cy="62" r="1.8" fill="#FFF"/>
+              <circle cx="48" cy="64" r="5" fill="#2B2A29"/>
+              <circle cx="50" cy="62" r="1.8" fill="#FFF"/>
+              <path d="M 38 72 Q 41 80 44 72 Z" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2.6" stroke-linejoin="round"/>
+              <path d="M 18 64 Q 10 54 16 46" stroke="#2B2A29" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+              <path d="M 58 72 Q 67 71 72 70" stroke="#2B2A29" stroke-width="4.2" stroke-linecap="round"/>
+              <path d="M 32 94 L 30 103 M 26 103 L 34 103" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 48 94 L 50 103 M 46 103 L 54 103" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+            </g>
+
+            <g transform="translate(6, 4)">
+              <path d="M 76 34 C 80 28, 86 28, 90 34 L 105 78 C 108 85, 102 92, 95 92 L 67 92 C 60 92, 54 85, 57 78 Z" fill="#FF7B39" stroke="#2B2A29" stroke-width="4.5" stroke-linejoin="round"/>
+              <ellipse cx="69" cy="72" rx="4.5" ry="3" fill="#FF5A5F"/>
+              <ellipse cx="94" cy="72" rx="4.5" ry="3" fill="#FF5A5F"/>
+              <path d="M 70 63 Q 75 56 80 63" stroke="#2B2A29" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M 85 63 Q 90 56 95 63" stroke="#2B2A29" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M 78 69 Q 82 73 85 69 Q 88 73 92 69" stroke="#2B2A29" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M 98 70 Q 108 62 105 52" stroke="#2B2A29" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+              <path d="M 71 92 L 70 102 M 66 102 L 74 102" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 89 92 L 91 102 M 87 102 L 95 102" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+        `;
+      }
+
+      // 2. Padankan Perasaan: Chibi Detective Square with Magnifying Glass & Big Sparkle Eye
+      const match = document.getElementById("icon-match");
+      if (match) {
+        match.innerHTML = `
+          <svg viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 88 20 Q 97 14 102 22 Q 99 30 94 33 L 94 38 M 94 45 L 94 48" stroke="#FFD13B" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M 88 20 Q 97 14 102 22 Q 99 30 94 33 L 94 38 M 94 45 L 94 48" stroke="#2B2A29" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            
+            <rect x="22" y="38" width="56" height="56" rx="15" fill="#3A86FF" stroke="#2B2A29" stroke-width="4.5"/>
+            
+            <path d="M 22 40 Q 48 18 78 34 L 80 42 L 20 42 Z" fill="#FF7B39" stroke="#2B2A29" stroke-width="3.5" stroke-linejoin="round"/>
+            <circle cx="50" cy="24" r="3.5" fill="#FFD13B" stroke="#2B2A29" stroke-width="2"/>
+            
+            <circle cx="37" cy="62" r="5" fill="#2B2A29"/>
+            <circle cx="39" cy="60" r="1.8" fill="#FFF"/>
+            <ellipse cx="30" cy="71" rx="4.5" ry="3" fill="#FF70A6"/>
+            <path d="M 40 73 Q 46 80 52 73" stroke="#2B2A29" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+            
+            <path d="M 36 94 L 34 104 M 30 104 L 38 104" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 58 94 L 60 104 M 56 104 L 64 104" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+
+            <line x1="82" y1="80" x2="104" y2="102" stroke="#2B2A29" stroke-width="9" stroke-linecap="round"/>
+            <line x1="82" y1="80" x2="104" y2="102" stroke="#FF7B39" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="70" cy="66" r="26" fill="#8ECAE6" fill-opacity="0.65" stroke="#2B2A29" stroke-width="4.8"/>
+            <circle cx="70" cy="66" r="11" fill="#2B2A29"/>
+            <circle cx="67" cy="62" r="4.2" fill="#FFF"/>
+            <circle cx="74" cy="69" r="2.2" fill="#FFF"/>
+            <ellipse cx="80" cy="76" rx="6" ry="4" fill="#FF70A6" opacity="0.85"/>
+            <path d="M 54 54 Q 68 46 78 54" stroke="#FFF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        `;
+      }
+
+      // 3. Bina Ekspresi: Chibi Pink Oval as a Cute Artist Crafting a Smile with Crayon
+      const build = document.getElementById("icon-build");
+      if (build) {
+        build.innerHTML = `
+          <svg viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="98,18 100,12 102,18 108,20 102,22 100,28 98,22 92,20" fill="#FFD13B" stroke="#2B2A29" stroke-width="1.8"/>
+            <polygon points="20,38 22,34 24,38 28,40 24,42 22,46 20,42 16,40" fill="#70E000" stroke="#2B2A29" stroke-width="1.8"/>
+
+            <ellipse cx="50" cy="68" rx="27" ry="36" fill="#FF70A6" stroke="#2B2A29" stroke-width="4.5"/>
+            
+            <path d="M 30 40 C 32 24, 66 22, 70 38 C 74 44, 28 46, 30 40 Z" fill="#9D4EDD" stroke="#2B2A29" stroke-width="3.5"/>
+            <circle cx="50" cy="24" r="2.5" fill="#FFD13B"/>
+
+            <ellipse cx="34" cy="73" rx="4.5" ry="3" fill="#FF5A5F"/>
+            <ellipse cx="62" cy="73" rx="4.5" ry="3" fill="#FF5A5F"/>
+
+            <path d="M 33 62 Q 38 55 43 62" stroke="#2B2A29" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+            <circle cx="58" cy="61" r="5" fill="#2B2A29"/>
+            <circle cx="60" cy="59" r="1.8" fill="#FFF"/>
+            <path d="M 43 73 Q 48 81 54 73" stroke="#2B2A29" stroke-width="3.2" fill="#FFF" stroke-linecap="round"/>
+
+            <path d="M 40 102 L 38 109 M 34 109 L 42 109" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 58 102 L 60 109 M 56 109 L 64 109" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+
+            <g transform="translate(62, 45) rotate(25)">
+              <rect x="0" y="0" width="12" height="34" rx="2" fill="#FFD13B" stroke="#2B2A29" stroke-width="3.2"/>
+              <polygon points="0,0 6,-12 12,0" fill="#EAE3D2" stroke="#2B2A29" stroke-width="3.2" stroke-linejoin="round"/>
+              <polygon points="2,-4 6,-12 10,-4" fill="#FF5A5F"/>
+            </g>
+
+            <path d="M 76 34 Q 90 48 104 34" stroke="#FF5A5F" stroke-width="4.8" stroke-linecap="round" fill="none"/>
+            <path d="M 80 23 Q 86 17 92 23" stroke="#2B2A29" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        `;
+      }
+
+      // 4. Pengembaraan Perasaan: Chibi Purple Star Adventurer on Grassy Hill under Cloud
+      const adv = document.getElementById("icon-adventure");
+      if (adv) {
+        adv.innerHTML = `
+          <svg viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 4 104 Q 60 84 116 104 L 116 116 L 4 116 Z" fill="#70E000" stroke="#2B2A29" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M 48 114 Q 58 102 68 94" stroke="#FAF6ED" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <circle cx="20" cy="100" r="3" fill="#FF5A5F"/>
+            <circle cx="102" cy="100" r="3" fill="#FFD13B"/>
+
+            <path d="M 75 22 Q 82 14 90 18 Q 98 14 102 22 Q 107 26 102 32 L 76 32 Q 70 28 75 22 Z" fill="#EDF6F9" stroke="#2B2A29" stroke-width="2.6"/>
+            <polygon points="24,20 26,14 28,20 34,22 28,24 26,30 24,24 18,22" fill="#FFD13B" stroke="#2B2A29" stroke-width="1.8"/>
+
+            <g transform="translate(6, 4)">
+              <rect x="22" y="48" width="12" height="18" rx="4" fill="#FF7B39" stroke="#2B2A29" stroke-width="3"/>
+              <polygon points="54,18 66,42 92,43 72,60 80,86 54,71 28,86 36,60 16,43 42,42" fill="#9D4EDD" stroke="#2B2A29" stroke-width="4.5" stroke-linejoin="round"/>
+              <path d="M 44 63 Q 54 70 64 63 L 58 74 Z" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2.6" stroke-linejoin="round"/>
+
+              <ellipse cx="40" cy="54" rx="4" ry="2.6" fill="#FF70A6"/>
+              <ellipse cx="68" cy="54" rx="4" ry="2.6" fill="#FF70A6"/>
+
+              <circle cx="46" cy="48" r="4.8" fill="#2B2A29"/>
+              <circle cx="48" cy="46" r="1.8" fill="#FFF"/>
+              <circle cx="62" cy="48" r="4.8" fill="#2B2A29"/>
+              <circle cx="64" cy="46" r="1.8" fill="#FFF"/>
+
+              <path d="M 50 54 Q 54 62 58 54 Z" fill="#FFD13B" stroke="#2B2A29" stroke-width="2.6" stroke-linejoin="round"/>
+
+              <path d="M 44 82 L 40 94 M 36 94 L 44 94" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 64 82 L 67 92 M 63 92 L 71 92" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+        `;
+      }
+    }
+
+    /* ALL 18 CUTE CHIBI STORYBOOK ADVENTURE SCENES ARTWORK */
+    function renderAdventureSceneArt(bgType, charId, emotionId) {
+      const charUrl = CHARACTER_ASSETS[charId]?.[emotionId] || CHARACTER_ASSETS[charId]?.base || "";
+      const charSVG = generateCharacterSVG(charId, emotionId, 120);
+      let bgDecor = "";
+
+      if (bgType === "gift") {
+        bgDecor = `
+          <rect x="0" y="150" width="400" height="70" fill="#D8F3DC"/>
+          <g transform="translate(245, 95)">
+            <rect x="0" y="20" width="65" height="52" rx="6" fill="#FF5A5F" stroke="#2B2A29" stroke-width="4"/>
+            <line x1="32.5" y1="20" x2="32.5" y2="72" stroke="#FFD13B" stroke-width="8"/>
+            <line x1="0" y1="46" x2="65" y2="46" stroke="#FFD13B" stroke-width="8"/>
+            <path d="M 32.5 20 C 18 5 16 0 32.5 15 C 49 0 47 5 32.5 20" fill="#FFD13B" stroke="#2B2A29" stroke-width="3"/>
+            <circle cx="32.5" cy="20" r="4.5" fill="#FF7B39" stroke="#2B2A29" stroke-width="2"/>
+          </g>
+        `;
+      } else if (bgType === "room") {
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#EAE3D2"/>
+          <g transform="translate(240, 95)">
+            <rect x="0" y="10" width="75" height="55" rx="8" fill="#8ECAE6" stroke="#2B2A29" stroke-width="4"/>
+            <circle cx="37.5" cy="38" r="14" fill="#FFD13B" stroke="#2B2A29" stroke-width="3"/>
+            <path d="M 28 42 Q 37.5 48 47 42" stroke="#2B2A29" stroke-width="2" fill="none"/>
+            <circle cx="15" cy="5" r="7" fill="#FF70A6" stroke="#2B2A29" stroke-width="2"/>
+            <circle cx="30" cy="5" r="7" fill="#FF70A6" stroke="#2B2A29" stroke-width="2"/>
+            <circle cx="22" cy="10" r="10" fill="#FFB703" stroke="#2B2A29" stroke-width="2.5"/>
+          </g>
+        `;
+      } else if (bgType === "blocks") {
+        bgDecor = `
+          <rect x="0" y="150" width="400" height="70" fill="#F0EAD6"/>
+          <rect x="235" y="148" width="34" height="18" rx="4" fill="#FF7B39" stroke="#2B2A29" stroke-width="3" transform="rotate(18 235 148)"/>
+          <rect x="275" y="142" width="28" height="28" rx="4" fill="#3A86FF" stroke="#2B2A29" stroke-width="3" transform="rotate(-22 275 142)"/>
+          <polygon points="325,135 305,165 345,165" fill="#FFD13B" stroke="#2B2A29" stroke-width="3"/>
+          <circle cx="225" cy="162" r="5" fill="#70E000" stroke="#2B2A29" stroke-width="2"/>
+        `;
+      } else if (bgType === "rain") {
+        bgDecor = `
+          <rect x="0" y="0" width="400" height="220" fill="#DCEBEE"/>
+          <rect x="240" y="25" width="95" height="95" rx="4" fill="#8ECAE6" stroke="#2B2A29" stroke-width="5"/>
+          <line x1="287" y1="25" x2="287" y2="120" stroke="#2B2A29" stroke-width="3.5"/>
+          <line x1="240" y1="72" x2="335" y2="72" stroke="#2B2A29" stroke-width="3.5"/>
+          <polygon points="285,38 273,62 288,62 276,85" fill="#FFD13B" stroke="#2B2A29" stroke-width="2.5"/>
+          <circle cx="255" cy="50" r="2.5" fill="#3A86FF"/>
+          <circle cx="310" cy="90" r="2.5" fill="#3A86FF"/>
+        `;
+      } else if (bgType === "park") {
+        bgDecor = `
+          <rect x="0" y="130" width="400" height="90" fill="#95D5B2"/>
+          <circle cx="325" cy="85" r="32" fill="#52B788" stroke="#2B2A29" stroke-width="4"/>
+          <rect x="320" y="117" width="10" height="43" fill="#B76935" stroke="#2B2A29" stroke-width="3"/>
+          <circle cx="250" cy="155" r="5" fill="#FF5A5F"/>
+          <circle cx="280" cy="162" r="5" fill="#FFD13B"/>
+        `;
+      } else if (bgType === "night") {
+        bgDecor = `
+          <rect x="0" y="0" width="400" height="220" fill="#2B2D42"/>
+          <circle cx="320" cy="50" r="24" fill="#FFD13B" stroke="#2B2A29" stroke-width="3"/>
+          <circle cx="329" cy="44" r="20" fill="#2B2D42"/>
+          <polygon points="240,40 242,46 248,46 243,50 245,56 240,52 235,56 237,50 232,46 238,46" fill="#FFF"/>
+          <polygon points="280,85 281,90 286,90 282,93 284,98 280,95 276,98 278,93 274,90 279,90" fill="#FFD13B"/>
+        `;
+      } else if (bgType === "art") {
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#FFFDF9"/>
+          <rect x="250" y="70" width="75" height="85" rx="5" fill="#FFF" stroke="#2B2A29" stroke-width="4"/>
+          <path d="M 270 105 Q 285 90 300 105 Q 285 120 270 105" fill="#FF70A6" stroke="#2B2A29" stroke-width="3"/>
+          <ellipse cx="285" cy="105" rx="2" ry="7" fill="#2B2A29"/>
+          <ellipse cx="295" cy="125" rx="6" ry="3" fill="#8ECAE6" opacity="0.8"/>
+        `;
+      } else if (bgType === "snack") {
+        // THE BISKUT COKLAT SCENE (Square Friend Sharing Chocolate Cookies)
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#EAE3D2"/>
+          <g transform="translate(225, 68)">
+            <!-- Picnic mat / Gingham cloth -->
+            <rect x="0" y="55" width="135" height="42" rx="6" fill="#FF70A6" stroke="#2B2A29" stroke-width="3"/>
+            <path d="M 15 55 L 75 97 M 45 55 L 105 97 M 15 97 L 75 55 M 45 97 L 105 55" stroke="#FFF" stroke-width="2.5" opacity="0.6"/>
+            <!-- Ceramic Plate -->
+            <ellipse cx="62" cy="74" rx="46" ry="18" fill="#FFFDF9" stroke="#2B2A29" stroke-width="3.5"/>
+            <ellipse cx="62" cy="74" rx="36" ry="12" fill="#FFF8E7" stroke="#2B2A29" stroke-width="1.8"/>
+            <!-- Big Chocolate Cookie 1 -->
+            <ellipse cx="44" cy="71" rx="22" ry="14" fill="#D4A373" stroke="#2B2A29" stroke-width="3"/>
+            <ellipse cx="37" cy="68" rx="3.5" ry="2.5" fill="#582F0E"/>
+            <ellipse cx="49" cy="66" rx="3.5" ry="2.2" fill="#582F0E"/>
+            <ellipse cx="43" cy="75" rx="3" ry="2" fill="#582F0E"/>
+            <ellipse cx="55" cy="72" rx="2.5" ry="2" fill="#582F0E"/>
+            <!-- Big Chocolate Cookie 2 -->
+            <ellipse cx="78" cy="73" rx="20" ry="13" fill="#D4A373" stroke="#2B2A29" stroke-width="3"/>
+            <ellipse cx="72" cy="70" rx="3" ry="2.2" fill="#582F0E"/>
+            <ellipse cx="84" cy="69" rx="3.2" ry="2" fill="#582F0E"/>
+            <ellipse cx="78" cy="77" rx="2.8" ry="1.8" fill="#582F0E"/>
+            <!-- Yummy crumbs -->
+            <circle cx="103" cy="76" r="2.2" fill="#D4A373"/>
+            <circle cx="107" cy="74" r="1.6" fill="#582F0E"/>
+            <!-- Cute Chibi Milk Bottle -->
+            <rect x="98" y="24" width="22" height="38" rx="5" fill="#FFFDF9" stroke="#2B2A29" stroke-width="2.4"/>
+            <rect x="101" y="16" width="16" height="8" rx="2" fill="#8ECAE6" stroke="#2B2A29" stroke-width="2"/>
+            <line x1="112" y1="10" x2="116" y2="28" stroke="#FF5A5F" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="105" cy="38" r="1.3" fill="#2B2A29"/>
+            <circle cx="113" cy="38" r="1.3" fill="#2B2A29"/>
+            <ellipse cx="103" cy="42" rx="1.5" ry="0.9" fill="#FF70A6"/>
+            <ellipse cx="115" cy="42" rx="1.5" ry="0.9" fill="#FF70A6"/>
+            <path d="M 107 42 Q 109 44 111 42" stroke="#2B2A29" stroke-width="1.2" fill="none"/>
+          </g>
+        `;
+      } else if (bgType === "balloon") {
+        // Star's balloon drifting into the sky
+        bgDecor = `
+          <rect x="0" y="0" width="400" height="220" fill="#E8F4F8"/>
+          <g transform="translate(255, 30)">
+            <ellipse cx="30" cy="35" rx="22" ry="26" fill="#FF5A5F" stroke="#2B2A29" stroke-width="3.5"/>
+            <polygon points="27,61 33,61 30,66" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2"/>
+            <path d="M 30 66 Q 20 85 35 105 Q 25 125 32 145" stroke="#2B2A29" stroke-width="2.5" fill="none" stroke-dasharray="2 3"/>
+            <ellipse cx="23" cy="26" rx="5" ry="9" fill="#FFF" opacity="0.6"/>
+          </g>
+        `;
+      } else if (bgType === "icecream") {
+        // Oval's yummy strawberry ice cream
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#FFE8D6"/>
+          <g transform="translate(260, 45)">
+            <polygon points="25,75 55,75 40,130" fill="#D4A373" stroke="#2B2A29" stroke-width="3"/>
+            <line x1="28" y1="85" x2="48" y2="120" stroke="#B08968" stroke-width="1.5"/>
+            <line x1="52" y1="85" x2="32" y2="120" stroke="#B08968" stroke-width="1.5"/>
+            <circle cx="40" cy="55" r="24" fill="#FF70A6" stroke="#2B2A29" stroke-width="3.5"/>
+            <circle cx="40" cy="26" r="6" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2"/>
+            <ellipse cx="32" cy="48" rx="2" ry="4" fill="#FFD13B"/>
+            <ellipse cx="48" cy="52" rx="2" ry="4" fill="#70E000"/>
+          </g>
+        `;
+      } else if (bgType === "puzzle") {
+        // Dinosaur puzzle
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#EDF6F9"/>
+          <g transform="translate(245, 95)">
+            <rect x="0" y="10" width="80" height="55" rx="6" fill="#FFF" stroke="#2B2A29" stroke-width="3.5"/>
+            <path d="M 15 25 Q 25 15 35 25 L 35 48 L 15 48 Z" fill="#70E000" stroke="#2B2A29" stroke-width="2"/>
+            <path d="M 45 25 L 65 25 L 65 48 L 45 48 Z" fill="#FFD13B" stroke="#2B2A29" stroke-width="2"/>
+            <circle cx="28" cy="32" r="2" fill="#2B2A29"/>
+            <rect x="70" y="45" width="22" height="20" rx="3" fill="#3A86FF" stroke="#2B2A29" stroke-width="2.5" transform="rotate(25 70 45)"/>
+          </g>
+        `;
+      } else if (bgType === "stage") {
+        // Singing on classroom stage
+        bgDecor = `
+          <rect x="0" y="130" width="400" height="90" fill="#EAE3D2"/>
+          <rect x="0" y="0" width="400" height="25" fill="#FF5A5F" stroke="#2B2A29" stroke-width="3"/>
+          <path d="M 0 25 Q 40 45 80 25 Q 120 45 160 25 Q 200 45 240 25 Q 280 45 320 25 Q 360 45 400 25" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2"/>
+          <g transform="translate(270, 75)">
+            <line x1="25" y1="20" x2="25" y2="85" stroke="#2B2A29" stroke-width="4"/>
+            <circle cx="25" cy="18" r="10" fill="#8ECAE6" stroke="#2B2A29" stroke-width="3"/>
+            <ellipse cx="25" cy="85" rx="16" ry="6" fill="#2B2A29"/>
+            <text x="42" y="30" font-family="'Quicksand', sans-serif" font-weight="900" font-size="16" fill="#FF7B39">♪</text>
+            <text x="52" y="16" font-family="'Quicksand', sans-serif" font-weight="900" font-size="20" fill="#9D4EDD">♫</text>
+          </g>
+        `;
+      } else if (bgType === "hug") {
+        // Toy basket & warm hearts
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#FAF6ED"/>
+          <g transform="translate(250, 90)">
+            <rect x="10" y="25" width="70" height="45" rx="6" fill="#D4A373" stroke="#2B2A29" stroke-width="3.5"/>
+            <circle cx="28" cy="18" r="10" fill="#FFB703" stroke="#2B2A29" stroke-width="2.5"/>
+            <circle cx="55" cy="15" r="12" fill="#FF70A6" stroke="#2B2A29" stroke-width="2.5"/>
+            <path d="M 45 0 C 45 -8, 35 -10, 33 -4 C 33 2, 45 8, 45 8 C 45 8, 57 2, 57 -4 C 55 -10, 45 -8, 45 0 Z" fill="#FF5A5F" stroke="#2B2A29" stroke-width="2"/>
+          </g>
+        `;
+      } else if (bgType === "pool") {
+        // Pool water & floatie
+        bgDecor = `
+          <rect x="0" y="125" width="400" height="95" fill="#8ECAE6"/>
+          <path d="M 0 125 Q 50 115 100 125 T 200 125 T 300 125 T 400 125" stroke="#3A86FF" stroke-width="4" fill="none"/>
+          <g transform="translate(250, 95)">
+            <ellipse cx="40" cy="40" rx="36" ry="20" fill="#FFD13B" stroke="#2B2A29" stroke-width="3.5"/>
+            <ellipse cx="40" cy="40" rx="18" ry="9" fill="#8ECAE6" stroke="#2B2A29" stroke-width="2.5"/>
+            <circle cx="68" cy="30" r="8" fill="#FF70A6" stroke="#2B2A29" stroke-width="2.5"/>
+          </g>
+        `;
+      } else if (bgType === "slide") {
+        // Playground slide
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#95D5B2"/>
+          <g transform="translate(240, 50)">
+            <line x1="15" y1="15" x2="15" y2="105" stroke="#2B2A29" stroke-width="4"/>
+            <line x1="5" y1="40" x2="25" y2="40" stroke="#2B2A29" stroke-width="3"/>
+            <line x1="5" y1="70" x2="25" y2="70" stroke="#2B2A29" stroke-width="3"/>
+            <path d="M 15 20 Q 40 30 55 60 Q 70 95 95 105" stroke="#FF5A5F" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <path d="M 15 20 Q 40 30 55 60 Q 70 95 95 105" stroke="#FFD13B" stroke-width="4" stroke-linecap="round" fill="none"/>
+          </g>
+        `;
+      } else if (bgType === "darkroom") {
+        // Gentle nightlight in bedroom
+        bgDecor = `
+          <rect x="0" y="0" width="400" height="220" fill="#1D2A44"/>
+          <circle cx="280" cy="110" r="45" fill="#FFE8D6" opacity="0.35"/>
+          <g transform="translate(260, 90)">
+            <rect x="10" y="35" width="20" height="30" rx="3" fill="#D4A373" stroke="#2B2A29" stroke-width="2"/>
+            <polygon points="20,10 24,20 34,20 26,26 29,36 20,30 11,36 14,26 6,20 16,20" fill="#FFD13B" stroke="#2B2A29" stroke-width="2"/>
+          </g>
+        `;
+      } else if (bgType === "lullaby") {
+        // Cozy bed with sleep notes
+        bgDecor = `
+          <rect x="0" y="0" width="400" height="220" fill="#2B2D42"/>
+          <g transform="translate(240, 90)">
+            <rect x="0" y="25" width="85" height="45" rx="8" fill="#3A86FF" stroke="#2B2A29" stroke-width="3.5"/>
+            <ellipse cx="20" cy="20" rx="14" ry="10" fill="#FFFDF9" stroke="#2B2A29" stroke-width="2.5"/>
+            <text x="50" y="10" font-family="'Quicksand', sans-serif" font-weight="900" font-size="16" fill="#FFD13B">z</text>
+            <text x="65" y="-5" font-family="'Quicksand', sans-serif" font-weight="900" font-size="22" fill="#FFD13B">Z</text>
+          </g>
+        `;
+      } else if (bgType === "garden") {
+        // Cute flower pot with green seedling sprout
+        bgDecor = `
+          <rect x="0" y="140" width="400" height="80" fill="#95D5B2"/>
+          <g transform="translate(255, 80)">
+            <polygon points="15,40 55,40 48,80 22,80" fill="#B08968" stroke="#2B2A29" stroke-width="3.5"/>
+            <rect x="12" y="32" width="46" height="10" rx="3" fill="#B08968" stroke="#2B2A29" stroke-width="2.5"/>
+            <path d="M 35 32 Q 35 15 45 10 Q 42 22 35 32" fill="#70E000" stroke="#2B2A29" stroke-width="2.5"/>
+            <path d="M 35 32 Q 35 15 25 10 Q 28 22 35 32" fill="#70E000" stroke="#2B2A29" stroke-width="2.5"/>
+            <circle cx="35" cy="5" r="3" fill="#FFD13B"/>
+          </g>
+        `;
+      } else {
+        bgDecor = `<rect x="0" y="140" width="400" height="80" fill="#E2ECE9"/>`;
+      }
+
+      return `
+        <svg viewBox="0 0 400 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          ${bgDecor}
+          <g transform="translate(40, 45)">
+            ${charUrl ? `<image href="${charUrl}" width="120" height="120" preserveAspectRatio="xMidYMid meet"/>` : charSVG}
+          </g>
+        </svg>
+      `;
+    }
+
+    function navigateToScreen(screenId) {
+      playTone("pop");
+      const screens = document.querySelectorAll(".screen-view");
+      screens.forEach(s => s.classList.remove("active"));
+
+      const target = document.getElementById(`screen-${screenId}`);
+      if (target) {
+        target.classList.add("active");
+        gameState.currentScreen = screenId;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      if (screenId === "meet") {
+        initMeetMode();
+      } else if (screenId === "match") {
+        initMatchMode();
+      } else if (screenId === "build") {
+        initBuildMode();
+      } else if (screenId === "adventure") {
+        initAdventureMode();
+      }
+    }
+
+    function initMeetMode() {
+      const tabsWrap = document.getElementById("meet-shape-tabs");
+      tabsWrap.innerHTML = "";
+
+      Object.keys(CHARACTERS_DATA).forEach(shapeKey => {
+        const char = CHARACTERS_DATA[shapeKey];
+        const btn = document.createElement("button");
+        btn.className = `shape-tab-btn ${gameState.meetShape === shapeKey ? "active" : ""}`;
+        btn.innerHTML = `
+          <span style="display:inline-block; width:14px; height:14px; border-radius:50%; background:${char.colorHex}; border:2px solid #2B2A29;"></span>
+          <span>${char.name[gameState.lang]}</span>
+        `;
+        btn.onclick = () => {
+          gameState.meetShape = shapeKey;
+          playTone("pop");
+          initMeetMode();
+        };
+        tabsWrap.appendChild(btn);
+      });
+
+      renderMeetStage();
+    }
+
+    function renderMeetStage() {
+      const stage = document.getElementById("meet-character-stage");
+      stage.innerHTML = "";
+      const charView = renderCharacterView(gameState.meetShape, gameState.meetEmotion, 190);
+      stage.appendChild(charView);
+
+      const em = EMOTIONS_DATA[gameState.meetEmotion];
+      const bubble = document.getElementById("meet-phrase-text");
+      bubble.textContent = `"${em.phrase[gameState.lang]}"`;
+
+      const grid = document.getElementById("meet-emotions-grid");
+      grid.innerHTML = "";
+
+      Object.keys(EMOTIONS_DATA).forEach(emKey => {
+        const item = EMOTIONS_DATA[emKey];
+        const btn = document.createElement("button");
+        btn.className = `emotion-badge-btn ${gameState.meetEmotion === emKey ? "active" : ""}`;
+        
+        const iconDiv = document.createElement("div");
+        iconDiv.className = "emotion-badge-icon";
+        iconDiv.appendChild(renderCharacterView(gameState.meetShape, emKey, 48));
+
+        const labelSpan = document.createElement("span");
+        labelSpan.textContent = item.name[gameState.lang];
+
+        btn.appendChild(iconDiv);
+        btn.appendChild(labelSpan);
+
+        btn.onclick = () => {
+          gameState.meetEmotion = emKey;
+          playTone("pop");
+          renderMeetStage();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function initMatchMode() {
+      gameState.matchQuestionIndex = 0;
+      gameState.matchCorrectCount = 0;
+      nextMatchQuestion();
+    }
+
+    function nextMatchQuestion() {
+      if (gameState.matchQuestionIndex >= gameState.matchRounds) {
+        showCelebrationScreen("match");
+        return;
+      }
+
+      const shapes = Object.keys(CHARACTERS_DATA);
+      const emotions = Object.keys(EMOTIONS_DATA);
+
+      const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+      const correctEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+
+      const distractors = emotions.filter(e => e !== correctEmotion);
+      for (let i = distractors.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+      }
+      const choices = [correctEmotion, distractors[0], distractors[1]];
+      for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [choices[i], choices[j]] = [choices[j], choices[i]];
+      }
+
+      gameState.matchCurrentQ = {
+        shape: randomShape,
+        correctEmotion: correctEmotion,
+        choices: choices
+      };
+
+      renderMatchQuestion();
+    }
+
+    function renderMatchQuestion() {
+      const q = gameState.matchCurrentQ;
+      const charName = CHARACTERS_DATA[q.shape].name[gameState.lang];
+      const banner = document.getElementById("match-question-banner");
+
+      banner.textContent = gameState.lang === "bm"
+        ? `Apakah perasaan ${charName}?`
+        : `How is ${charName} feeling?`;
+
+      const charContainer = document.getElementById("match-character-container");
+      charContainer.innerHTML = "";
+      charContainer.appendChild(renderCharacterView(q.shape, q.correctEmotion, 180));
+
+      const answersContainer = document.getElementById("match-answers-container");
+      answersContainer.innerHTML = "";
+      const feedback = document.getElementById("match-feedback-banner");
+      feedback.textContent = "";
+      feedback.className = "feedback-banner";
+
+      q.choices.forEach(ch => {
+        const emName = EMOTIONS_DATA[ch].name[gameState.lang];
+        const btn = document.createElement("button");
+        btn.className = "quiz-choice-btn";
+        btn.textContent = emName;
+        btn.onclick = () => handleMatchAnswer(ch, btn);
+        answersContainer.appendChild(btn);
+      });
+
+      const dotsContainer = document.getElementById("match-progress-dots");
+      dotsContainer.innerHTML = "";
+      for (let i = 0; i < gameState.matchRounds; i++) {
+        const dot = document.createElement("span");
+        dot.className = "quiz-dot";
+        if (i < gameState.matchQuestionIndex) dot.classList.add("done");
+        if (i === gameState.matchQuestionIndex) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function handleMatchAnswer(chosenEmotion, clickedBtn) {
+      const q = gameState.matchCurrentQ;
+      const t = TRANSLATIONS[gameState.lang];
+      const feedback = document.getElementById("match-feedback-banner");
+      const allBtns = document.querySelectorAll(".quiz-choice-btn");
+      allBtns.forEach(b => b.disabled = true);
+
+      if (chosenEmotion === q.correctEmotion) {
+        playTone("correct");
+        clickedBtn.classList.add("correct-choice");
+        feedback.className = "feedback-banner success";
+        feedback.textContent = t.feedbackCorrect;
+        gameState.matchCorrectCount++;
+      } else {
+        playTone("encourage");
+        clickedBtn.classList.add("gentle-notice");
+        feedback.className = "feedback-banner encouraging";
+        feedback.textContent = t.feedbackEncourage;
+      }
+
+      setTimeout(() => {
+        gameState.matchQuestionIndex++;
+        nextMatchQuestion();
+      }, 1600);
+    }
+
+    const FACE_PARTS = {
+      brows: [
+        { id: "happy_arch", svg: `<path d="M 15 25 Q 25 15 35 25" stroke="#2B2A29" stroke-width="4" fill="none"/>` },
+        { id: "furrowed", svg: `<path d="M 15 26 L 35 30" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>` },
+        { id: "worried", svg: `<path d="M 15 28 Q 25 35 35 26" stroke="#2B2A29" stroke-width="4" fill="none"/>` },
+        { id: "sleepy_low", svg: `<path d="M 15 28 L 35 28" stroke="#2B2A29" stroke-width="4" stroke-linecap="round"/>` }
+      ],
+      eyes: [
+        { id: "bright_round", svg: `<circle cx="25" cy="25" r="7" fill="#2B2A29"/><circle cx="27" cy="23" r="2.5" fill="#FFF"/>` },
+        { id: "cheerful_curved", svg: `<path d="M 15 28 Q 25 18 35 28" stroke="#2B2A29" stroke-width="4.5" fill="none"/>` },
+        { id: "wide_worried", svg: `<circle cx="25" cy="25" r="9" fill="#FFF" stroke="#2B2A29" stroke-width="3"/><circle cx="25" cy="25" r="4.5" fill="#2B2A29"/>` },
+        { id: "droopy_sleepy", svg: `<path d="M 15 25 Q 25 20 35 25" stroke="#2B2A29" stroke-width="4" fill="none"/><ellipse cx="25" cy="27" rx="4" ry="2" fill="#2B2A29"/>` },
+        { id: "downcast_sad", svg: `<ellipse cx="25" cy="26" rx="6" ry="7" fill="#2B2A29"/><circle cx="20" cy="33" r="3" fill="#3A86FF"/>` }
+      ],
+      mouth: [
+        { id: "big_smile", svg: `<path d="M 15 22 Q 25 35 35 22" stroke="#2B2A29" stroke-width="4.5" fill="none"/>` },
+        { id: "gentle_frown", svg: `<path d="M 15 28 Q 25 18 35 28" stroke="#2B2A29" stroke-width="4.5" fill="none"/>` },
+        { id: "tense_line", svg: `<path d="M 15 25 Q 25 23 35 25" stroke="#2B2A29" stroke-width="4.5" fill="none"/>` },
+        { id: "rounded_open", svg: `<ellipse cx="25" cy="25" rx="7" ry="11" fill="#FFF" stroke="#2B2A29" stroke-width="4.5"/>` },
+        { id: "wide_yawn", svg: `<ellipse cx="25" cy="25" rx="6" ry="9" fill="#EAE3D2" stroke="#2B2A29" stroke-width="4"/>` },
+        { id: "droop_unhappy", svg: `<path d="M 18 27 Q 25 23 32 27" stroke="#2B2A29" stroke-width="4" fill="none"/>` }
+      ]
+    };
+
+    function initBuildMode() {
+      const shapeTabs = document.getElementById("build-shape-tabs");
+      shapeTabs.innerHTML = "";
+
+      Object.keys(CHARACTERS_DATA).forEach(s => {
+        const char = CHARACTERS_DATA[s];
+        const btn = document.createElement("button");
+        btn.className = `shape-tab-btn ${gameState.buildShape === s ? "active" : ""}`;
+        btn.innerHTML = `
+          <span style="display:inline-block; width:14px; height:14px; border-radius:50%; background:${char.colorHex}; border:2px solid #2B2A29;"></span>
+          <span>${char.name[gameState.lang]}</span>
+        `;
+        btn.onclick = () => {
+          gameState.buildShape = s;
+          playTone("pop");
+          initBuildMode();
+        };
+        shapeTabs.appendChild(btn);
+      });
+
+      const emotions = Object.keys(EMOTIONS_DATA);
+      if (!gameState.buildTargetEmotion) {
+        gameState.buildTargetEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+      }
+
+      updateBuildTargetBanner();
+      renderBuildCanvas();
+      renderFeaturePalette();
+    }
+
+    function updateBuildTargetBanner() {
+      const em = EMOTIONS_DATA[gameState.buildTargetEmotion];
+      const targetName = document.getElementById("build-target-name");
+      targetName.textContent = `${em.name[gameState.lang]} (${em.name[gameState.lang === 'bm' ? 'en' : 'bm']})`;
+      const feedback = document.getElementById("build-feedback-banner");
+      feedback.textContent = "";
+      feedback.className = "feedback-banner";
+    }
+
+    function renderBuildCanvas() {
+      const container = document.getElementById("build-canvas-preview");
+      container.innerHTML = "";
+
+      const char = CHARACTERS_DATA[gameState.buildShape];
+      const col = char.colorHex;
+      const strokeCol = "#2B2A29";
+
+      let shapePath = "";
+      if (char.id === "circle") {
+        shapePath = `<circle cx="100" cy="95" r="54" fill="${col}" stroke="${strokeCol}" stroke-width="6"/>`;
+      } else if (char.id === "triangle") {
+        shapePath = `<polygon points="100,38 46,146 154,146" fill="${col}" stroke="${strokeCol}" stroke-width="6"/>`;
+      } else if (char.id === "square") {
+        shapePath = `<rect x="52" y="48" width="96" height="96" rx="14" fill="${col}" stroke="${strokeCol}" stroke-width="6"/>`;
+      } else if (char.id === "star") {
+        shapePath = `<polygon points="100,32 118,74 163,74 126,101 140,144 100,118 60,144 74,101 37,74 82,74" fill="${col}" stroke="${strokeCol}" stroke-width="6"/>`;
+      } else if (char.id === "oval") {
+        shapePath = `<ellipse cx="100" cy="95" rx="46" ry="62" fill="${col}" stroke="${strokeCol}" stroke-width="6"/>`;
+      }
+
+      let browsSVG = "";
+      if (gameState.buildFeatures.brows === "happy_arch") {
+        browsSVG = `
+          <path d="M 70 74 Q 80 66 90 74" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <path d="M 110 74 Q 120 66 130 74" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        `;
+      } else if (gameState.buildFeatures.brows === "furrowed") {
+        browsSVG = `
+          <path d="M 70 76 L 90 82" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 130 76 L 110 82" stroke="${strokeCol}" stroke-width="4.5" stroke-linecap="round"/>
+        `;
+      } else if (gameState.buildFeatures.brows === "worried") {
+        browsSVG = `
+          <path d="M 70 74 Q 80 80 90 76" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <path d="M 110 76 Q 120 80 130 74" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        `;
+      } else {
+        browsSVG = `
+          <path d="M 72 78 L 88 78" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 112 78 L 128 78" stroke="${strokeCol}" stroke-width="4" stroke-linecap="round"/>
+        `;
+      }
+
+      let eyesSVG = "";
+      if (gameState.buildFeatures.eyes === "bright_round") {
+        eyesSVG = `
+          <circle cx="80" cy="88" r="6" fill="${strokeCol}"/>
+          <circle cx="82" cy="86" r="2" fill="#FFF"/>
+          <circle cx="120" cy="88" r="6" fill="${strokeCol}"/>
+          <circle cx="122" cy="86" r="2" fill="#FFF"/>
+        `;
+      } else if (gameState.buildFeatures.eyes === "cheerful_curved") {
+        eyesSVG = `
+          <path d="M 72 90 Q 80 82 88 90" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <path d="M 112 90 Q 120 82 128 90" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        `;
+      } else if (gameState.buildFeatures.eyes === "wide_worried") {
+        eyesSVG = `
+          <circle cx="80" cy="88" r="8" fill="#FFF" stroke="${strokeCol}" stroke-width="3"/>
+          <circle cx="80" cy="88" r="4.5" fill="${strokeCol}"/>
+          <circle cx="120" cy="88" r="8" fill="#FFF" stroke="${strokeCol}" stroke-width="3"/>
+          <circle cx="120" cy="88" r="4.5" fill="${strokeCol}"/>
+        `;
+      } else if (gameState.buildFeatures.eyes === "droopy_sleepy") {
+        eyesSVG = `
+          <path d="M 72 90 Q 80 84 88 90" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="80" cy="92" rx="4" ry="2" fill="${strokeCol}"/>
+          <path d="M 112 90 Q 120 84 128 90" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="120" cy="92" rx="4" ry="2" fill="${strokeCol}"/>
+        `;
+      } else {
+        eyesSVG = `
+          <ellipse cx="80" cy="92" rx="5" ry="6" fill="${strokeCol}"/>
+          <ellipse cx="120" cy="92" rx="5" ry="6" fill="${strokeCol}"/>
+          <circle cx="75" cy="100" r="2.5" fill="#3A86FF"/>
+        `;
+      }
+
+      let mouthSVG = "";
+      if (gameState.buildFeatures.mouth === "big_smile") {
+        mouthSVG = `<path d="M 80 108 Q 100 130 120 108" stroke="${strokeCol}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+      } else if (gameState.buildFeatures.mouth === "gentle_frown") {
+        mouthSVG = `<path d="M 82 120 Q 100 104 118 120" stroke="${strokeCol}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+      } else if (gameState.buildFeatures.mouth === "tense_line") {
+        mouthSVG = `<path d="M 84 114 Q 100 110 116 114" stroke="${strokeCol}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+      } else if (gameState.buildFeatures.mouth === "rounded_open") {
+        mouthSVG = `<ellipse cx="100" cy="116" rx="9" ry="13" fill="#FFF" stroke="${strokeCol}" stroke-width="4.5"/>`;
+      } else if (gameState.buildFeatures.mouth === "wide_yawn") {
+        mouthSVG = `<ellipse cx="100" cy="114" rx="7" ry="10" fill="#EAE3D2" stroke="${strokeCol}" stroke-width="4"/>`;
+      } else {
+        mouthSVG = `<path d="M 88 116 Q 100 110 112 116" stroke="${strokeCol}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`;
+      }
+
+      const svgContent = `
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <path d="M 82 148 L 80 172 M 72 172 L 84 172" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 118 148 L 120 172 M 116 172 L 128 172" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 50 102 Q 32 112 36 126" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M 150 102 Q 168 112 164 126" stroke="${strokeCol}" stroke-width="5" stroke-linecap="round" fill="none"/>
+          ${shapePath}
+          <ellipse cx="74" cy="106" rx="9" ry="6" fill="#FF70A6" opacity="0.65"/>
+          <ellipse cx="126" cy="106" rx="9" ry="6" fill="#FF70A6" opacity="0.65"/>
+          ${browsSVG}
+          ${eyesSVG}
+          ${mouthSVG}
+        </svg>
+      `;
+
+      container.innerHTML = svgContent;
+    }
+
+    function renderFeaturePalette() {
+      const container = document.getElementById("feature-options-container");
+      container.innerHTML = "";
+      const currentCategory = gameState.buildActiveTab;
+      const options = FACE_PARTS[currentCategory];
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = `feature-option-btn ${gameState.buildFeatures[currentCategory] === opt.id ? "selected" : ""}`;
+        btn.innerHTML = `<svg width="50" height="50" viewBox="0 0 50 50">${opt.svg}</svg>`;
+        btn.onclick = () => {
+          gameState.buildFeatures[currentCategory] = opt.id;
+          playTone("pop");
+          renderBuildCanvas();
+          renderFeaturePalette();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function checkFaceExpressionMatch() {
+      const target = gameState.buildTargetEmotion;
+      const f = gameState.buildFeatures;
+      const t = TRANSLATIONS[gameState.lang];
+      const feedback = document.getElementById("build-feedback-banner");
+
+      let isMatch = false;
+
+      if (target === "happy") {
+        isMatch = (f.mouth === "big_smile") && (f.brows === "happy_arch" || f.eyes === "bright_round" || f.eyes === "cheerful_curved");
+      } else if (target === "sad") {
+        isMatch = (f.mouth === "gentle_frown" || f.eyes === "downcast_sad") && (f.brows === "worried");
+      } else if (target === "angry") {
+        isMatch = (f.brows === "furrowed") && (f.mouth === "tense_line" || f.mouth === "gentle_frown");
+      } else if (target === "scared") {
+        isMatch = (f.eyes === "wide_worried") && (f.mouth === "rounded_open" || f.mouth === "gentle_frown" || f.brows === "worried");
+      } else if (target === "surprised") {
+        isMatch = (f.mouth === "rounded_open") && (f.brows === "happy_arch" || f.eyes === "bright_round" || f.eyes === "wide_worried");
+      } else if (target === "sleepy") {
+        isMatch = (f.eyes === "droopy_sleepy" || f.mouth === "wide_yawn") && (f.brows === "sleepy_low");
+      } else if (target === "disappointed") {
+        isMatch = (f.mouth === "droop_unhappy" || f.mouth === "gentle_frown") && (f.brows === "sleepy_low" || f.brows === "worried");
+      } else if (target === "tired") {
+        isMatch = (f.eyes === "droopy_sleepy" || f.mouth === "wide_yawn" || f.mouth === "droop_unhappy") && (f.brows === "sleepy_low");
+      }
+
+      if (isMatch) {
+        playTone("correct");
+        feedback.className = "feedback-banner success";
+        feedback.textContent = t.buildSuccessMsg;
+      } else {
+        playTone("encourage");
+        feedback.className = "feedback-banner encouraging";
+        feedback.textContent = t.buildTryHint;
+      }
+    }
+
+    /* RANDOMIZED ADVENTURE MODE LOGIC */
+    function initAdventureMode() {
+      // Shuffle all 18 scenes and pick 8 random scenarios for this adventure journey
+      const shuffled = [...ADVENTURE_SCENES];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      gameState.adventureQueue = shuffled.slice(0, gameState.adventureRounds);
+      gameState.adventureIndex = 0;
+      renderAdventureScene();
+    }
+
+    function renderAdventureScene() {
+      if (gameState.adventureIndex >= gameState.adventureQueue.length) {
+        showCelebrationScreen("adventure");
+        return;
+      }
+
+      const scene = gameState.adventureQueue[gameState.adventureIndex];
+      const t = TRANSLATIONS[gameState.lang];
+
+      const stepper = document.getElementById("adventure-stepper-flags");
+      stepper.innerHTML = "";
+      gameState.adventureQueue.forEach((s, idx) => {
+        const flag = document.createElement("div");
+        flag.className = "stepper-flag";
+        flag.textContent = idx + 1;
+        if (idx < gameState.adventureIndex) flag.classList.add("completed");
+        if (idx === gameState.adventureIndex) flag.classList.add("current");
+        stepper.appendChild(flag);
+      });
+
+      const artFrame = document.getElementById("adventure-art-frame");
+      artFrame.innerHTML = renderAdventureSceneArt(scene.bgType, scene.character, scene.primaryFeeling);
+
+      const scenarioText = document.getElementById("adventure-scenario-text");
+      scenarioText.textContent = scene.scenario[gameState.lang];
+
+      document.getElementById("adventure-question-title").textContent = t.adventureQuestion;
+
+      const choicesContainer = document.getElementById("adventure-choices-container");
+      choicesContainer.innerHTML = "";
+
+      const feedback = document.getElementById("adventure-feedback-banner");
+      feedback.textContent = "";
+      feedback.className = "feedback-banner";
+
+      const empathyBox = document.getElementById("adventure-empathy-box");
+      empathyBox.style.display = "none";
+      empathyBox.textContent = "";
+
+      const allEmotions = Object.keys(EMOTIONS_DATA);
+      const distractors = allEmotions.filter(e => !scene.acceptableFeelings.includes(e));
+      for (let i = distractors.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+      }
+
+      const activeChoices = [scene.primaryFeeling, distractors[0], distractors[1]];
+      for (let i = activeChoices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeChoices[i], activeChoices[j]] = [activeChoices[j], activeChoices[i]];
+      }
+
+      activeChoices.forEach(choiceKey => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-choice-btn";
+        btn.textContent = EMOTIONS_DATA[choiceKey].name[gameState.lang];
+        btn.onclick = () => handleAdventureChoice(choiceKey, scene, btn);
+        choicesContainer.appendChild(btn);
+      });
+    }
+
+    function handleAdventureChoice(chosenFeeling, scene, clickedBtn) {
+      const t = TRANSLATIONS[gameState.lang];
+      const feedback = document.getElementById("adventure-feedback-banner");
+      const empathyBox = document.getElementById("adventure-empathy-box");
+      const allBtns = document.querySelectorAll("#adventure-choices-container .quiz-choice-btn");
+      allBtns.forEach(b => b.disabled = true);
+
+      if (scene.acceptableFeelings.includes(chosenFeeling)) {
+        playTone("correct");
+        clickedBtn.classList.add("correct-choice");
+        feedback.className = "feedback-banner success";
+        feedback.textContent = t.feedbackCorrect;
+      } else {
+        playTone("encourage");
+        clickedBtn.classList.add("gentle-notice");
+        feedback.className = "feedback-banner encouraging";
+        feedback.textContent = t.feedbackEncourage;
+      }
+
+      empathyBox.style.display = "block";
+      empathyBox.textContent = scene.empathyNote[gameState.lang];
+
+      setTimeout(() => {
+        gameState.adventureIndex++;
+        renderAdventureScene();
+      }, 2600);
+    }
+
+    function showCelebrationScreen(fromMode) {
+      playTone("celebrate");
+      navigateToScreen("celebration");
+
+      const charStage = document.getElementById("celebration-character-display");
+      charStage.innerHTML = "";
+      charStage.appendChild(renderCharacterView("star", "happy", 150));
+
+      const replayBtn = document.getElementById("btn-celebration-replay");
+      replayBtn.onclick = () => {
+        if (fromMode === "match") navigateToScreen("match");
+        else if (fromMode === "adventure") navigateToScreen("adventure");
+        else navigateToScreen("home");
+      };
+    }
+
+    function updateChibiIcons() {
+      // Header Sound Chibi SVG
+      const soundWrap = document.getElementById("sound-icon-wrap");
+      if (soundWrap) {
+        soundWrap.innerHTML = gameState.sound ? CHIBI_ICONS.speakerOn : CHIBI_ICONS.speakerOff;
+      }
+
+      // Home Chibi SVG Slots
+      document.querySelectorAll(".btn-home-svg-slot").forEach(slot => {
+        slot.innerHTML = CHIBI_ICONS.home;
+      });
+
+      // Build & Action Buttons Chibi SVGs
+      const checkSlot = document.getElementById("icon-build-check-slot");
+      if (checkSlot) checkSlot.innerHTML = CHIBI_ICONS.sparkle;
+
+      const resetSlot = document.getElementById("icon-build-reset-slot");
+      if (resetSlot) resetSlot.innerHTML = CHIBI_ICONS.refresh;
+
+      const newSlot = document.getElementById("icon-build-new-slot");
+      if (newSlot) newSlot.innerHTML = CHIBI_ICONS.target;
+
+      const replaySlot = document.getElementById("icon-celebrate-replay-slot");
+      if (replaySlot) replaySlot.innerHTML = CHIBI_ICONS.refresh;
+    }
+
+    function switchLanguage(newLang, force = false) {
+      if (gameState.lang === newLang && !force) return;
+      gameState.lang = newLang;
+      saveSettings();
+      if (!force) playTone("pop");
+
+      document.getElementById("btn-lang-bm").classList.toggle("active", newLang === "bm");
+      document.getElementById("btn-lang-en").classList.toggle("active", newLang === "en");
+
+      const t = TRANSLATIONS[newLang];
+      document.querySelectorAll("[data-i18n]").forEach(elem => {
+        const key = elem.getAttribute("data-i18n");
+        if (t[key]) {
+          elem.textContent = t[key];
+        }
+      });
+
+      const welcomeSub = document.getElementById("home-welcome-sub");
+      if (welcomeSub) welcomeSub.textContent = t.welcomeSub;
+
+      if (gameState.currentScreen === "meet") {
+        initMeetMode();
+      } else if (gameState.currentScreen === "match") {
+        renderMatchQuestion();
+      } else if (gameState.currentScreen === "build") {
+        updateBuildTargetBanner();
+        renderBuildCanvas();
+        renderFeaturePalette();
+      } else if (gameState.currentScreen === "adventure") {
+        renderAdventureScene();
+      }
+
+      renderHomeParade();
+      updateChibiIcons();
+    }
+
+    function renderHomeParade() {
+      const container = document.getElementById("home-characters-parade");
+      container.innerHTML = "";
+
+      Object.keys(CHARACTERS_DATA).forEach(shapeKey => {
+        const char = CHARACTERS_DATA[shapeKey];
+        const item = document.createElement("div");
+        item.className = "parade-item";
+        item.tabIndex = 0;
+        item.setAttribute("role", "button");
+        item.setAttribute("aria-label", `${char.name[gameState.lang]} - ${char.colorName[gameState.lang]}`);
+
+        const charImg = renderCharacterView(shapeKey, "base", 110, true);
+        const nameBadge = document.createElement("span");
+        nameBadge.className = "parade-name-badge";
+        nameBadge.textContent = char.name[gameState.lang];
+
+        item.appendChild(charImg);
+        item.appendChild(nameBadge);
+
+        item.onclick = () => {
+          gameState.meetShape = shapeKey;
+          gameState.meetEmotion = "happy";
+          navigateToScreen("meet");
+        };
+
+        item.onkeydown = (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            item.onclick();
+          }
+        };
+
+        container.appendChild(item);
+      });
+    }
+
+    function toggleSound() {
+      gameState.sound = !gameState.sound;
+      saveSettings();
+      updateChibiIcons();
+      if (gameState.sound) playTone("pop");
+    }
+
+    function setupEventListeners() {
+      document.getElementById("btn-lang-bm").onclick = () => switchLanguage("bm");
+      document.getElementById("btn-lang-en").onclick = () => switchLanguage("en");
+
+      document.getElementById("btn-sound-toggle").onclick = toggleSound;
+
+      document.getElementById("btn-header-home").onclick = () => navigateToScreen("home");
+      document.getElementById("btn-nav-home").onclick = () => navigateToScreen("home");
+      document.getElementById("btn-meet-back-home").onclick = () => navigateToScreen("home");
+      document.getElementById("btn-celebration-home").onclick = () => navigateToScreen("home");
+
+      document.getElementById("card-mode-meet").onclick = () => navigateToScreen("meet");
+      document.getElementById("card-mode-match").onclick = () => navigateToScreen("match");
+      document.getElementById("card-mode-build").onclick = () => navigateToScreen("build");
+      document.getElementById("card-mode-adventure").onclick = () => navigateToScreen("adventure");
+
+      ["card-mode-meet", "card-mode-match", "card-mode-build", "card-mode-adventure"].forEach(id => {
+        const el = document.getElementById(id);
+        el.onkeydown = (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            el.click();
+          }
+        };
+      });
+
+      const featureTabs = document.querySelectorAll(".feature-tab");
+      featureTabs.forEach(tab => {
+        tab.onclick = () => {
+          featureTabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          gameState.buildActiveTab = tab.getAttribute("data-feature");
+          playTone("pop");
+          renderFeaturePalette();
+        };
+      });
+
+      document.getElementById("btn-build-check").onclick = checkFaceExpressionMatch;
+      document.getElementById("btn-build-reset").onclick = () => {
+        playTone("pop");
+        gameState.buildFeatures = { brows: "happy_arch", eyes: "bright_round", mouth: "big_smile" };
+        renderBuildCanvas();
+        renderFeaturePalette();
+        const feedback = document.getElementById("build-feedback-banner");
+        feedback.textContent = "";
+        feedback.className = "feedback-banner";
+      };
+      document.getElementById("btn-build-new").onclick = () => {
+        playTone("pop");
+        const emotions = Object.keys(EMOTIONS_DATA);
+        gameState.buildTargetEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+        updateBuildTargetBanner();
+      };
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedSettings();
+      renderModeIcons();
+      renderHomeParade();
+      setupEventListeners();
+      updateChibiIcons();
+      switchLanguage(gameState.lang, true);
+    });
+  </script>
+</body>
+</html>
